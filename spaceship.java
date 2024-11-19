@@ -28,6 +28,6 @@ class spaceship{
             //Decrease fuel by 1?
             //Print that you are now on (bodyName)
         //Else
-        
+        System.out.println("You cannot land on a body you are not near! Go to this body before you land.");
     }
 }
