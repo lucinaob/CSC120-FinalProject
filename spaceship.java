@@ -22,12 +22,21 @@ class spaceship{
         
     }
 
-    public land(celestialBody bodyName){
+    public void land(celestialBody bodyName){
         //If this.orbitalDistance == celestialBody.orbitalDistance
             //Land on body
             //Decrease fuel by 1?
             //Print that you are now on (bodyName)
         //Else
         System.out.println("You cannot land on a body you are not near! Go to this body before you land.");
+    }
+
+    public void takeOff(celestialBody bodyName){
+        //If this.orbitalDistance == celestialBody.orbitalDistance
+            //Take off
+            //Fuel - 1?
+            //Print that you are now in space
+        //Else,
+        System.out.println("You are not on this body and cannot take off from it.");
     }
 }
