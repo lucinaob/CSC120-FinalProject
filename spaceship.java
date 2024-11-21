@@ -1,13 +1,22 @@
+import java.util.ArrayList;
+
 class spaceship{
     
     Number rations;
     Number fuel;
     Number orbitalDistance;
+    private ArrayList<Being> onboard; // what rover currenty contains 
 
     public spaceship(Number rations, Number fuel){
         this.rations = rations;
         this.fuel = fuel;
+        this.onboard = new ArrayList<>(); 
         this.orbitalDistance = 1;
+    }
+
+    private void board(Being being){
+        // function for a being to board spaceship
+        this.onboard.add(being); 
     }
 
     public void go(celestialBody bodyName){
@@ -39,4 +48,6 @@ class spaceship{
         //Else,
         System.out.println("You are not on this body and cannot take off from it.");
     }
-}
+
+    }
+
