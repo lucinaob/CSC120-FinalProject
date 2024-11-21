@@ -1,22 +1,13 @@
-import java.util.ArrayList;
-
 class spaceship{
     
     Number rations;
     Number fuel;
     Number orbitalDistance;
-    private ArrayList<Being> onboard; // what rover currenty contains 
 
     public spaceship(Number rations, Number fuel){
         this.rations = rations;
         this.fuel = fuel;
-        this.onboard = new ArrayList<>(); 
         this.orbitalDistance = 1;
-    }
-
-    private void board(Being being){
-        // function for a being to board spaceship
-        this.onboard.add(being); 
     }
 
     public void go(celestialBody bodyName){
@@ -32,22 +23,22 @@ class spaceship{
     }
 
     public void land(celestialBody bodyName){
-        //If this.orbitalDistance == celestialBody.orbitalDistance
-            //Land on body
-            //Decrease fuel by 1?
-            //Print that you are now on (bodyName)
-        //Else
-        System.out.println("You cannot land on a body you are not near! Go to this body before you land.");
+        if (this.orbitalDistance == bodyName.orbitalRadius){
+            System.out.println("Landing on " + bodyName + "...");
+            System.out.println("Welcome to " + bodyName + "!");
+            this.fuel -= 1;
+        } else{
+            System.out.println("You cannot land on a body you are not near! Go to this body before you land.");
+        }
     }
 
     public void takeOff(celestialBody bodyName){
-        //If this.orbitalDistance == celestialBody.orbitalDistance
-            //Take off
-            //Fuel - 1?
-            //Print that you are now in space
-        //Else,
-        System.out.println("You are not on this body and cannot take off from it.");
+        if (this.orbitalDistance == bodyName.orbitalRadius){
+            System.out.println("Leaving " + bodyName + "...");
+            System.out.println("Welcome to space!");
+            this.fuel -= 1;
+        } else{
+            System.out.println("You are not on this body and cannot take off from it.");
+        }
     }
-
-    }
-
+}
