@@ -10,6 +10,12 @@ class spaceship{
         this.orbitalDistance = 1;
     }
 
+
+    private void board(Being being){
+        // function for a being to board spaceship
+        this.onboard.add(being); 
+    }
+
     public void go(celestialBody bodyName){
         //Math for going/fuel level here :)
         //If the ship has enough fuel to go there,
