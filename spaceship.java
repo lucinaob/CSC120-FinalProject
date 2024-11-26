@@ -1,19 +1,31 @@
 class spaceship{
     
-    Number rations;
-    Number fuel;
+    static int rations;
+    int fuel;
     Number orbitalDistance;
 
-    public spaceship(Number rations, Number fuel){
+    public spaceship(int rations, int fuel){
         this.rations = rations;
         this.fuel = fuel;
         this.orbitalDistance = 1;
     }
 
+    private void board(User user){ //make possible for aliens?
+        if(user.onBoard){ 
+            System.out.println("You are already on this ship and cannot board.");
+        } else{
+            user.onBoard = true;
+            System.out.println("Welcome aboard!");
+        }
+    }
 
-    private void board(Being being){
-        // function for a being to board spaceship
-        this.onboard.add(being); 
+    private void unboard(User user){
+        if(user.onBoard){
+            user.onBoard = false;
+            System.out.println("Now unboarding...");
+        } else{
+            System.out.println("You can't unboard a ship you're not on!");
+        }
     }
 
     public void go(celestialBody bodyName){
@@ -46,5 +58,9 @@ class spaceship{
         } else{
             System.out.println("You are not on this body and cannot take off from it.");
         }
+    }
+
+    public String status(){
+        return "CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations;
     }
 }
