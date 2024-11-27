@@ -3,22 +3,22 @@ import java.util.ArrayList;
 public class User extends Being{
 
     boolean knowsCode;
-    ArrayList<String> inventory; //String or objects? idk
+    ArrayList<String> inventory = new ArrayList<>(); //String or objects? idk
     boolean onBoard; //should this be in ship or person class? should be wherever board() is
 
 
     public User(String name, celestialBody location){
         super(name, location);
         this.onBoard = true;
-        this.inventory = null;
+        ArrayList<String> inventory;
         this.knowsCode = false;
     }
 
     public void dig(){
+        //rework if statements to they overlap?
         if (!inventory.contains("Shovel")){
-            System.out.println("Ouch! Digging with your hands is ineffective. And painful.");
-        }
-        if (onBoard = true){
+            System.out.println("Ouch! Trying to dig with your hands is ineffective. And painful.");
+        } if (onBoard = true){ 
             System.out.println("Your shovel hits metal. You can't dig here.");
         }
         //Digging should reveal something, shouldn't it? 
@@ -35,10 +35,12 @@ public class User extends Being{
 
     public void eat(){
         if (spaceship.rations == 0){
-            System.out.println("There is nothing to eat. You are out of rations.");
+            System.out.println("You are out of rations. There is nothing to eat.");
         } else{
+            System.out.println("Eating rations...");
             spaceship.rations -= 1;
-        } if (spaceship.rations < 3){
+            System.out.println("RATION LEVEL: " + spaceship.rations);
+        } if (spaceship.rations < 3 && spaceship.rations > 0){
             System.out.println("You're running low on rations. It may be time to rethink your strategy...");
         }
     }

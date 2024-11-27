@@ -10,7 +10,7 @@ class spaceship{
         this.orbitalDistance = 1;
     }
 
-    private void board(User user){ //make possible for aliens?
+    public void board(User user){ //make possible for aliens?
         if(user.onBoard){ 
             System.out.println("You are already on this ship and cannot board.");
         } else{
@@ -19,16 +19,18 @@ class spaceship{
         }
     }
 
-    private void unboard(User user){
-        if(user.onBoard){
+    public void unboard(User user){
+        if(!user.onBoard){
+            System.out.println("You can't unboard a ship you're not on!");
+        } else{
             user.onBoard = false;
             System.out.println("Now unboarding...");
-        } else{
-            System.out.println("You can't unboard a ship you're not on!");
         }
     }
 
     public void go(celestialBody bodyName){
+        this.fuel -= 3;
+        this.orbitalDistance = 2;
         //Math for going/fuel level here :)
         //If the ship has enough fuel to go there,
             //change orbitalDistance to celestial body's
@@ -42,7 +44,7 @@ class spaceship{
 
     public void land(celestialBody bodyName){
         if (this.orbitalDistance == bodyName.orbitalRadius){
-            System.out.println("Landing on " + bodyName + "...");
+            System.out.println("Landing on " + bodyName + "..."); //bodyname doesn't work?
             System.out.println("Welcome to " + bodyName + "!");
             this.fuel -= 1;
         } else{
@@ -52,7 +54,7 @@ class spaceship{
 
     public void takeOff(celestialBody bodyName){
         if (this.orbitalDistance == bodyName.orbitalRadius){
-            System.out.println("Leaving " + bodyName + "...");
+            System.out.println("Leaving " + bodyName + "..."); //bodyname doens't work?
             System.out.println("Welcome to space!");
             this.fuel -= 1;
         } else{
