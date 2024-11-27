@@ -1,8 +1,9 @@
+
 class spaceship{
     
     static int rations;
     int fuel;
-    Number orbitalDistance;
+    int orbitalDistance;
 
     public spaceship(int rations, int fuel){
         this.rations = rations;
@@ -10,7 +11,7 @@ class spaceship{
         this.orbitalDistance = 1;
     }
 
-    public void board(User user){ //make possible for aliens?
+    public void board(User user){ 
         if(user.onBoard){ 
             System.out.println("You are already on this ship and cannot board.");
         } else{
@@ -29,16 +30,14 @@ class spaceship{
     }
 
     public void go(celestialBody bodyName){
-        this.fuel -= 3;
-        this.orbitalDistance = 2;
-        //Math for going/fuel level here :)
-        //If the ship has enough fuel to go there,
-            //change orbitalDistance to celestial body's
-            //print that you are now there
-            //Change fuel level by difference between ship's orbitalDistance and body's orbitalDistance
-            //print fuel level?
-        //Else,
-            //Print that there is not enough fuel to go there
+        int distance = Math.abs(bodyName.orbitalRadius - this.orbitalDistance);
+        if (fuel < distance){
+            System.out.println("You don't have enough fuel to go here!");
+        } else{
+            fuel -= distance;
+            this.orbitalDistance = bodyName.orbitalRadius;
+            System.out.println("You are now in " + bodyName.name + "'s orbit!");
+        }
         
     }
 
