@@ -13,7 +13,10 @@ class celestialBody{
         this.orbitalRadius = orbitalRadius; 
         this.temperature = temp; 
         this.destroyed = destroyed; 
-        this.description = ""; 
+        this.description = description; 
+        if(this.description == null){
+            this.description = "";
+        }
     }
 
     public void getInfested(Being alien){ // alien infests 
@@ -21,9 +24,7 @@ class celestialBody{
     }
 
     public void landOn(User user){ // person lands on ship
-        this.inhabitants.add(User user); 
-
+        this.inhabitants.add(user);
     }
-
 
 }

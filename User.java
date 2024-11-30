@@ -32,7 +32,7 @@ public class User extends Being{
 
     public void eat(){
         if (spaceShip.rations == 0){
-            System.out.println("You are out of rations. There is nothing to eat...");
+            System.out.println("You are out of rations. There is nothing to eat.");
         } else{
             System.out.println("Eating rations...");
             spaceShip.rations -= 1;

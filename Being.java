@@ -1,7 +1,7 @@
 public class Being {
     String name; 
     boolean alive;
-    int hitpoints; 
+    static int hitpoints; 
     celestialBody location; // why it sync correctly? 
 
     public Being(String name, celestialBody location, int hitpoints){

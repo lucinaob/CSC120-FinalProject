@@ -1,6 +1,6 @@
 class spaceShip{
     
-    int rations;
+    static int rations;
     int fuel;
     int orbitalDistance;
 
@@ -42,8 +42,8 @@ class spaceShip{
 
     public void land(celestialBody bodyName){
         if (this.orbitalDistance == bodyName.orbitalRadius){
-            System.out.println("Landing on " + bodyName + "..."); //bodyname doesn't work?
-            System.out.println("Welcome to " + bodyName + "!");
+            System.out.println("Landing on " + bodyName.name + "..."); //bodyname doesn't work?
+            System.out.println("Welcome to " + bodyName.name + "!");
             this.fuel -= 1;
         } else{
             System.out.println("You cannot land on a body you are not near! Go to this body before you land.");
