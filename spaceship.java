@@ -1,11 +1,10 @@
-
-class spaceship{
+class spaceShip{
     
-    static int rations;
+    int rations;
     int fuel;
     int orbitalDistance;
 
-    public spaceship(int rations, int fuel){
+    public spaceShip(int rations, int fuel){
         this.rations = rations;
         this.fuel = fuel;
         this.orbitalDistance = 1;
@@ -61,7 +60,7 @@ class spaceship{
         }
     }
 
-    public String status(){
-        return "CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations;
+    public void getStatus(){
+        System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations); 
     }
 }

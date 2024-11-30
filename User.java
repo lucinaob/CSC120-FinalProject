@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class User extends Being{
 
@@ -30,23 +31,23 @@ public class User extends Being{
     }
 
     public void eat(){
-        if (spaceship.rations == 0){
-            System.out.println("You are out of rations. There is nothing to eat.");
+        if (spaceShip.rations == 0){
+            System.out.println("You are out of rations. There is nothing to eat...");
         } else{
             System.out.println("Eating rations...");
-            spaceship.rations -= 1;
-            System.out.println("RATION LEVEL: " + spaceship.rations);
-        } if (spaceship.rations < 3 && spaceship.rations > 0){
+            spaceShip.rations -= 1;
+            System.out.println("RATION LEVEL: " + spaceShip.rations);
+        } if (spaceShip.rations < 3 && spaceShip.rations > 0){
             System.out.println("You're running low on rations. It may be time to rethink your strategy...");
         }
     }
 
-    public void explore(){
-        //
-    }
+    public void attack(Being being){
 
-    public void attack(Being name){
-        //
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(10) + 1;
+        being.getHurt(randomNumber); // sbubtracts hitpoints from user 
+        System.out.println(randomNumber + "hitpoints subtarcted from " + being.name);
     }
 
     

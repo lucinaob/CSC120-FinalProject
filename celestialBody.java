@@ -16,8 +16,13 @@ class celestialBody{
         this.description = ""; 
     }
 
-    public void getInfested(Being alien){
+    public void getInfested(Being alien){ // alien infests 
         this.inhabitants.add(alien); 
+    }
+
+    public void landOn(User user){ // person lands on ship
+        this.inhabitants.add(User user); 
+
     }
 
 
