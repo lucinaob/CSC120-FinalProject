@@ -174,21 +174,18 @@ public class GameLoop {
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
                     landSuccess=true; }
 
-                } else {
-                    landSuccess = true;
-                }
+                
+
                 if (landSuccess){
                     ship.land(ship.location); // land on location ship is at 
-                }
-
-            }}
+                }}
+            
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 
             }
 
           } while (midgameSequence); //And user onBoard, glitched out when i tried lol
-
         
         }
 }
