@@ -1,7 +1,3 @@
-import java.lang.classfile.ClassFile;
-import java.lang.classfile.instruction.ThrowInstruction;
-import java.lang.invoke.SwitchPoint;
-import java.time.chrono.IsoEra;
 import java.util.Scanner;
 
 
@@ -31,13 +27,13 @@ public class GameLoop {
 
     // initilizing other planets
     //ORBITAL DISTANCE IS WRONG FOR ALL i didn't know what the right # was
-    celestialBody Mercury = new celestialBody("Mercury", 0.387, 800, false, "", surfaceProperties.rock);
-    celestialBody Venus = new celestialBody("Venus", 0.723, 870, false, "", surfaceProperties.rock);
-    celestialBody Mars = new celestialBody("Mars", 1.52, -85, false, "", surfaceProperties.rock);
-    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, -166, false, "", surfaceProperties.gas);
-    celestialBody Saturn = new celestialBody("Saturn", 9.5, -288, false, "",  surfaceProperties.gas);
-    celestialBody Uranus = new celestialBody("Uranus", 19.19, -320, false, "",  surfaceProperties.gas);
-    celestialBody Neptune = new celestialBody("Neptune", 30., -353, false, "",  surfaceProperties.gas);
+    celestialBody Mercury = new celestialBody("Mercury", 0.387, 800, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock);
+    celestialBody Venus = new celestialBody("Venus", 0.723, 870, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock);
+    celestialBody Mars = new celestialBody("Mars", 1.52, -85, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock);
+    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, -166, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. ", surfaceProperties.gas);
+    celestialBody Saturn = new celestialBody("Saturn", 9.5, -288, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas);
+    celestialBody Uranus = new celestialBody("Uranus", 19.19, -320, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas);
+    celestialBody Neptune = new celestialBody("Neptune", 30., -353, false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas);
 
     do{
             System.out.println("What do you wish do?");
@@ -126,7 +122,6 @@ public class GameLoop {
             System.out.println("");
             System.out.println("What do you do? Where do you go?");
             // grabs user input 
-
         do { 
             
             userResponse = userInput.nextLine().toLowerCase(); 
@@ -134,7 +129,7 @@ public class GameLoop {
             //There must be a more efficient way to do this?
             if (userResponse.contains("go")){
                 if (userResponse.contains("mars")){
-                    ship.go(Mars); }
+                    ship.go(Mars);}
                 else if (userResponse.contains("mercury")){
                     ship.go(Mercury);}
                 else if (userResponse.contains("venus")){
@@ -153,7 +148,9 @@ public class GameLoop {
                 }
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
-                } }
+                } 
+            System.out.println(ship.location.name + " appears " + ship.location.description); // print what you see 
+            }
 
             else if (userResponse.contains("land")){
                 boolean landSuccess = false; 
@@ -166,22 +163,26 @@ public class GameLoop {
                     user.die();  // rip 
                 }
 
-                else if (ship.location.surface == surfaceProperties.ice){
-                    System.out.println("As you descend towards " + ship.location.name + ", you don't notice much. There is little atmosphere, and the surface is glistening in reflected light.");
+                if (ship.location.surface == surfaceProperties.ice){
+                    System.out.println("As you descend towards " + ship.location.name + ", you don't notice much difference from the stark, interplanetary air. There is little atmosphere, and the surface is glistening in reflected light.");
+                    landSuccess=true; }
+
+                if (ship.location.surface == surfaceProperties.rock){
+                    System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
+                    landSuccess=true; }
 
                 if (landSuccess){
                     ship.land(ship.location); // land on location ship is at 
-                }
-
-            }}
+                    System.out.println("You are on " + ship.location.name + ".");
+                    System.out.println(ship.location.description);
+                } }
+                
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 
-                
-
             }
 
-        } while (midgameSequence); //And user onBoard, glitched out when i tried lol
+          } while (midgameSequence); //And user onBoard, glitched out when i tried lol
 
         
         }

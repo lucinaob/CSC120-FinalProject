@@ -24,7 +24,6 @@ public class Being {
     public void die(){
         this.hitpoints = 0; 
         this.alive = false;  // sets alive to false - dead
-        System.out.println("You have died...");
     }
 
 }
