@@ -1,7 +1,5 @@
-import java.lang.classfile.ClassFile;
-import java.lang.classfile.instruction.ThrowInstruction;
-import java.lang.invoke.SwitchPoint;
-import java.time.chrono.IsoEra;
+//import java.lang.classfile.ClassFile;
+//import java.lang.classfile.instruction.ThrowInstruction;
 import java.util.Scanner;
 
 
@@ -130,7 +128,7 @@ public class GameLoop {
         do { 
             
             userResponse = userInput.nextLine().toLowerCase(); 
-
+            
             //There must be a more efficient way to do this?
             if (userResponse.contains("go")){
                 if (userResponse.contains("mars")){
@@ -156,6 +154,9 @@ public class GameLoop {
                 } }
 
             else if (userResponse.contains("land")){
+
+                //Account for body mentioned? right now if you type "land on mars" while at mercury it'll give you "landing on mercury"
+
                 boolean landSuccess = false; 
                 System.out.println("You engage your landing gears and begain your descent towards " + ship.location.name + ".");
 
@@ -169,16 +170,17 @@ public class GameLoop {
                 else if (ship.location.surface == surfaceProperties.ice){
                     System.out.println("As you descend towards " + ship.location.name + ", you don't notice much. There is little atmosphere, and the surface is glistening in reflected light.");
 
+                } else {
+                    landSuccess = true;
+                }
                 if (landSuccess){
                     ship.land(ship.location); // land on location ship is at 
                 }
 
-            }}
+            }
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 
-                
-
             }
 
         } while (midgameSequence); //And user onBoard, glitched out when i tried lol

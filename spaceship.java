@@ -45,13 +45,15 @@ class spaceShip{
         
     }
 
-    public void land(celestialBody bodyName){
+    public boolean land(celestialBody bodyName){
         if (this.location.orbitalRadius == bodyName.orbitalRadius){ // same location 
             System.out.println("Landing on " + bodyName.name + "..."); //bodyname doesn't work?
             System.out.println("Welcome to " + bodyName.name + "!");
             this.fuel -= 1;
+            return true;
         } else{
             System.out.println("You cannot land on a body you are not near! Go to this body before you land.");
+            return false;
         }
     }
 
@@ -66,7 +68,6 @@ class spaceShip{
     }
 
     public void getStatus(){
-        System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations); 
-        System.out.println("USER LOCATION: \n" + this.location.name);
+        System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations + "\n + LOCATION: " + this.location.name); 
     }
 }
