@@ -1,3 +1,7 @@
+import java.lang.classfile.ClassFile;
+import java.lang.classfile.instruction.ThrowInstruction;
+import java.lang.invoke.SwitchPoint;
+import java.time.chrono.IsoEra;
 import java.util.Scanner;
 
 
@@ -5,8 +9,9 @@ public class GameLoop {
 
     public static void main(String[] args) {
 
-    // This is a "flag" to let us know when the loop should end
+    // This is a "flag" to let us know when the intro loop should end
     boolean introSequence = true;
+    boolean midgameSequence = true;
 
     // We'll use this to get input from the user.
     Scanner userInput = new Scanner(System.in);
@@ -14,30 +19,25 @@ public class GameLoop {
     // Storage for user's responses
     String userResponse = "";
 
-    try{  // prints intro to game, try/catch block to pause for dramatic effect 
-        System.out.println("...");
-        Thread.sleep(1000);  
-        System.out.println("The air is extremly still.");
-        Thread.sleep(1500);  
-        System.out.println("Before you is a dark expanse. Metallic walls surround you.");
-        Thread.sleep(1600);  
-        System.out.println("You have no idea where you are."); 
-    } catch (InterruptedException e) {}
+    System.out.println("...");
+    System.out.println("The air is extremly still.");
+    System.out.println("Before you is a dark expanse. Metallic walls surround you.");
+    System.out.println("You have no idea where you are."); 
 
     // initilizes ship, user, aliens 
-    spaceShip ship = new spaceShip(30, 30); 
-    celestialBody Earth = new celestialBody("Earth", 1, 273, true, "Blue and green, with a gaping hole through the center."); 
+    celestialBody Earth = new celestialBody("Earth", 1., 273, true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock); 
+    spaceShip ship = new spaceShip(30, 30, Earth); 
     User user = new User("name", Earth, 30); 
 
     // initilizing other planets
     //ORBITAL DISTANCE IS WRONG FOR ALL i didn't know what the right # was
-    celestialBody Mercury = new celestialBody("Mercury", 2, 800, false, "");
-    celestialBody Venus = new celestialBody("Venus", 1, 870, false, "");
-    celestialBody Mars = new celestialBody("Mars", 1, -85, false, "");
-    celestialBody Jupiter = new celestialBody("Jupiter", 1, -166, false, "");
-    celestialBody Saturn = new celestialBody("Saturn", 1, -288, false, "");
-    celestialBody Uranus = new celestialBody("Uranus", 1, -320, false, "");
-    celestialBody Neptune = new celestialBody("Uranus", 1, -353, false, "");
+    celestialBody Mercury = new celestialBody("Mercury", 0.387, 800, false, "", surfaceProperties.rock);
+    celestialBody Venus = new celestialBody("Venus", 0.723, 870, false, "", surfaceProperties.rock);
+    celestialBody Mars = new celestialBody("Mars", 1.52, -85, false, "", surfaceProperties.rock);
+    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, -166, false, "", surfaceProperties.gas);
+    celestialBody Saturn = new celestialBody("Saturn", 9.5, -288, false, "",  surfaceProperties.gas);
+    celestialBody Uranus = new celestialBody("Uranus", 19.19, -320, false, "",  surfaceProperties.gas);
+    celestialBody Neptune = new celestialBody("Neptune", 30., -353, false, "",  surfaceProperties.gas);
 
     do{
             System.out.println("What do you wish do?");
@@ -109,7 +109,7 @@ public class GameLoop {
                 System.out.println("");
             }
 
-            if (userResponse.contains("move") && userResponse.contains("joystick")){
+            if (userResponse.contains("move") || userResponse.contains("joystick")){
                 System.out.println("You move the joystick, and you feel the ship jerk to the side. ");
                 System.out.println("Suddenly, the dark expanse before you is interrupted by a familiar sight");
                 System.out.println("A large blue and green body, not unlike images of Earth that you have seen before, sits still before you.");
@@ -121,12 +121,18 @@ public class GameLoop {
 
         } } while (introSequence); 
 
+        System.out.println("A chill runs down your spine. How did this happen? When did this happen? What did this?");
+            System.out.println("and most importantly... How long have you been unconcious?");
+            System.out.println("");
+            System.out.println("What do you do? Where do you go?");
+            // grabs user input 
+
         do { 
-            System.out.println("What do you wish do?");
+            
             userResponse = userInput.nextLine().toLowerCase(); 
 
             //There must be a more efficient way to do this?
-            if (userResponse.split(" ", 2)[0].equals("go")){
+            if (userResponse.contains("go")){
                 if (userResponse.contains("mars")){
                     ship.go(Mars); }
                 else if (userResponse.contains("mercury")){
@@ -147,13 +153,35 @@ public class GameLoop {
                 }
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
+                } }
+
+            else if (userResponse.contains("land")){
+                boolean landSuccess = false; 
+                System.out.println("You engage your landing gears and begain your descent towards " + ship.location.name + ".");
+
+                if (ship.location.surface == surfaceProperties.gas){ // you cannot land on a gas giant u fool
+                    System.out.println("As you descend towards " + ship.location.name + ", the air grows dense and hazy, and you feel a stong graviational pull.");
+                    System.out.println("The walls around you begin to cave in as the outside haze closes in.");
+                    System.out.println("You feel crushed under the extreme gravity as the ship's power begins to fade...");
+                    user.die();  // rip 
                 }
+
+                else if (ship.location.surface == surfaceProperties.ice){
+                    System.out.println("As you descend towards " + ship.location.name + ", you don't notice much. There is little atmosphere, and the surface is glistening in reflected light.");
+
+                if (landSuccess){
+                    ship.land(ship.location); // land on location ship is at 
+                }
+
+            }}
+
+            if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
+                ship.getStatus(); // get status at any time 
                 
-                //Same basic format for each main thing you can do from spaceship? like Land?
 
             }
 
-        } while (introSequence == false); //And user onBoard, glitched out when i tried lol
+        } while (midgameSequence); //And user onBoard, glitched out when i tried lol
 
         
         }

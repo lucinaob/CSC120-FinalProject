@@ -1,13 +1,14 @@
 class spaceShip{
     
     static int rations;
-    int fuel;
-    int orbitalDistance;
+    double fuel;
+ //   double orbitalDistance;
+    celestialBody location; 
 
-    public spaceShip(int rations, int fuel){
+    public spaceShip(int rations, double fuel, celestialBody location){
         this.rations = rations;
         this.fuel = fuel;
-        this.orbitalDistance = 1;
+        this.location = location;
     }
 
     public void board(User user){ 
@@ -29,7 +30,7 @@ class spaceShip{
     }
 
     public void go(celestialBody bodyName){
-        int distance = Math.abs(bodyName.orbitalRadius - this.orbitalDistance);
+        double distance = Math.abs(bodyName.orbitalRadius - this.location.orbitalRadius);
         if (fuel < distance){
             System.out.println("You don't have enough fuel to go here!");
         } else{
@@ -37,16 +38,15 @@ class spaceShip{
                 System.out.println("You are already here!");
             } else{
                 fuel -= distance;
-                this.orbitalDistance = bodyName.orbitalRadius;
-                System.out.println("You are now in " + bodyName.name + "'s orbit!");
-                System.out.println(bodyName.description);
+                this.location = bodyName;
+                System.out.println("You are now in orbit about " + bodyName.name + ".");
             }
         }
         
     }
 
     public void land(celestialBody bodyName){
-        if (this.orbitalDistance == bodyName.orbitalRadius){
+        if (this.location.orbitalRadius == bodyName.orbitalRadius){ // same location 
             System.out.println("Landing on " + bodyName.name + "..."); //bodyname doesn't work?
             System.out.println("Welcome to " + bodyName.name + "!");
             this.fuel -= 1;
@@ -56,9 +56,9 @@ class spaceShip{
     }
 
     public void takeOff(celestialBody bodyName){
-        if (this.orbitalDistance == bodyName.orbitalRadius){
-            System.out.println("Leaving " + bodyName + "..."); //bodyname doens't work?
-            System.out.println("Welcome to space!");
+        if (this.location.orbitalRadius == bodyName.orbitalRadius){
+            System.out.println("Taking off from " + bodyName.name + "..."); //bodyname doens't work?
+            System.out.println("You are now in orbit about " + bodyName.name + ".");
             this.fuel -= 1;
         } else{
             System.out.println("You are not on this body and cannot take off from it.");
@@ -67,5 +67,6 @@ class spaceShip{
 
     public void getStatus(){
         System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations); 
+        System.out.println("USER LOCATION: \n" + this.location.name);
     }
 }

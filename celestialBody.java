@@ -2,18 +2,20 @@ import java.util.ArrayList;
 
 class celestialBody{
     String name;
-    int orbitalRadius; 
-    Number temperature; 
+    double orbitalRadius; 
+    double temperature; 
+    surfaceProperties surface; // description of surface 
     ArrayList<Being> inhabitants; // contains inhabitants as objects bc different classes
     boolean destroyed; 
     String description; 
 
-    public celestialBody(String name, int orbitalRadius, Number temp, boolean destroyed, String description){
+    public celestialBody(String name, double orbitalRadius, double temp, boolean destroyed, String description, surfaceProperties surface){
         this.name = name; 
         this.orbitalRadius = orbitalRadius; 
         this.temperature = temp; 
         this.destroyed = destroyed; 
         this.description = description; 
+        this.surface = surface; 
         if(this.description == null){
             this.description = "";
         }
