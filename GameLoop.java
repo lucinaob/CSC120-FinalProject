@@ -29,6 +29,16 @@ public class GameLoop {
     celestialBody Earth = new celestialBody("Earth", 1, 273, true, "Blue and green, with a gaping hole through the center."); 
     User user = new User("name", Earth, 30); 
 
+    // initilizing other planets
+    //ORBITAL DISTANCE IS WRONG FOR ALL i didn't know what the right # was
+    celestialBody Mercury = new celestialBody("Mercury", 2, 800, false, "");
+    celestialBody Venus = new celestialBody("Venus", 1, 870, false, "");
+    celestialBody Mars = new celestialBody("Mars", 1, -85, false, "");
+    celestialBody Jupiter = new celestialBody("Jupiter", 1, -166, false, "");
+    celestialBody Saturn = new celestialBody("Saturn", 1, -288, false, "");
+    celestialBody Uranus = new celestialBody("Uranus", 1, -320, false, "");
+    celestialBody Neptune = new celestialBody("Uranus", 1, -353, false, "");
+
     do{
             System.out.println("What do you wish do?");
             userResponse = userInput.nextLine().toLowerCase(); 
@@ -115,9 +125,29 @@ public class GameLoop {
             System.out.println("What do you wish do?");
             userResponse = userInput.nextLine().toLowerCase(); 
 
+            //There must be a more efficient way to do this?
             if (userResponse.split(" ", 2)[0].equals("go")){
-                //go to given celestial body, take whatever name inputted as place to go?
-                    //If/else loops for each body? Ex. if contains "Mars" go to mars
+                if (userResponse.contains("mars")){
+                    ship.go(Mars); }
+                else if (userResponse.contains("mercury")){
+                    ship.go(Mercury);}
+                else if (userResponse.contains("venus")){
+                    ship.go(Venus);}
+                else if (userResponse.contains("earth")){
+                    ship.go(Earth);
+                }
+                else if (userResponse.contains("jupiter")){
+                    ship.go(Jupiter);
+                } 
+                else if (userResponse.contains("neptune")){
+                    ship.go(Neptune);
+                } 
+                else if(userResponse.contains("uranus")){
+                    ship.go(Uranus);
+                }
+                else if(userResponse.contains("saturn")){
+                    ship.go(Saturn);
+                }
                 
                 //Same basic format for each main thing you can do from spaceship? like Land?
 

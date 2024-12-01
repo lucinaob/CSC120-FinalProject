@@ -33,9 +33,14 @@ class spaceShip{
         if (fuel < distance){
             System.out.println("You don't have enough fuel to go here!");
         } else{
-            fuel -= distance;
-            this.orbitalDistance = bodyName.orbitalRadius;
-            System.out.println("You are now in " + bodyName.name + "'s orbit!");
+            if(distance == 0){
+                System.out.println("You are already here!");
+            } else{
+                fuel -= distance;
+                this.orbitalDistance = bodyName.orbitalRadius;
+                System.out.println("You are now in " + bodyName.name + "'s orbit!");
+                System.out.println(bodyName.description);
+            }
         }
         
     }
