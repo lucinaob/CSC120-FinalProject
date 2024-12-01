@@ -125,7 +125,7 @@ public class GameLoop {
         do { 
             
             userResponse = userInput.nextLine().toLowerCase(); 
-
+            
             //There must be a more efficient way to do this?
             if (userResponse.contains("go")){
                 if (userResponse.contains("mars")){
@@ -153,6 +153,9 @@ public class GameLoop {
             }
 
             else if (userResponse.contains("land")){
+
+                //Account for body mentioned? right now if you type "land on mars" while at mercury it'll give you "landing on mercury"
+
                 boolean landSuccess = false; 
                 System.out.println("You engage your landing gears and begain your descent towards " + ship.location.name + ".");
 
@@ -171,12 +174,14 @@ public class GameLoop {
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
                     landSuccess=true; }
 
+                } else {
+                    landSuccess = true;
+                }
                 if (landSuccess){
                     ship.land(ship.location); // land on location ship is at 
-                    System.out.println("You are on " + ship.location.name + ".");
-                    System.out.println(ship.location.description);
-                } }
-                
+                }
+
+            }}
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 

@@ -50,6 +50,11 @@ public class User extends Being{
         System.out.println(randomNumber + "hitpoints subtarcted from " + being.name);
     }
 
+    public void die(){
+        this.hitpoints = 0; 
+        this.alive = false;
+        System.out.println("You have died...");
+    }
     
     
 }
