@@ -93,15 +93,10 @@ public class GameLoop {
             else if (userResponse.split(" ", 2)[0].equals("hit") || userResponse.split(" ", 2)[0].equals("press")){
                 if (userResponse.contains("eject")){
                     System.out.println("You hit the EJECT button once, twice, three times, but nothing happens. It doesn't seem to work.");
-                    System.out.println("");
+                    System.out.println("");  // incredible
                     //Or could just kill 'em lol
                 }
                 System.out.println("I don't know what you mean. What do you want to press?"); // this doesn't work I think i put it in the wrong place
-                System.out.println("");
-            }
-
-            else {
-                System.out.println("I don't know what you mean. Try to 'look,' 'move,' or 'examine'");
                 System.out.println("");
             }
 
@@ -115,7 +110,14 @@ public class GameLoop {
                 introSequence = false; 
 
 
-        } } while (introSequence); 
+        } 
+
+        else { // dialog to catch any phrases not included earlier 
+            System.out.println("I don't know what you mean. Try to 'look,' 'move,' or 'examine'");
+            System.out.println("");
+        }
+
+        } while (introSequence); 
 
         System.out.println("A chill runs down your spine. How did this happen? When did this happen? What did this?");
             System.out.println("and most importantly... How long have you been unconcious?");
@@ -152,7 +154,7 @@ public class GameLoop {
             System.out.println(ship.location.name + " appears " + ship.location.description); // print what you see 
             }
 
-            else if (userResponse.contains("land")){
+            if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
 
                 //Account for body mentioned? right now if you type "land on mars" while at mercury it'll give you "landing on mercury"
 
@@ -164,6 +166,7 @@ public class GameLoop {
                     System.out.println("The walls around you begin to cave in as the outside haze closes in.");
                     System.out.println("You feel crushed under the extreme gravity as the ship's power begins to fade...");
                     user.die();  // rip 
+                    // want to have some end sequence class we can call from gameloop class I think to put when the user dies 
                 }
 
                 if (ship.location.surface == surfaceProperties.ice){
@@ -173,7 +176,6 @@ public class GameLoop {
                 if (ship.location.surface == surfaceProperties.rock){
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
                     landSuccess=true; }
-
                 
 
                 if (landSuccess){
