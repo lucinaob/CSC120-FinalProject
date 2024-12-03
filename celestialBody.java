@@ -16,6 +16,7 @@ class celestialBody{
         this.destroyed = destroyed; 
         this.description = description; 
         this.surface = surface; 
+        this.inhabitants = new ArrayList<>();
         if(this.description == null){
             this.description = "";
         }

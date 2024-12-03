@@ -26,7 +26,6 @@ public class GameLoop {
     User user = new User("name", Earth, 30); 
 
     // initilizing other planets
-    //ORBITAL DISTANCE IS WRONG FOR ALL i didn't know what the right # was
     celestialBody Mercury = new celestialBody("Mercury", 0.387, 800, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock);
     celestialBody Venus = new celestialBody("Venus", 0.723, 870, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock);
     celestialBody Mars = new celestialBody("Mars", 1.52, -85, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock);
@@ -34,6 +33,18 @@ public class GameLoop {
     celestialBody Saturn = new celestialBody("Saturn", 9.5, -288, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas);
     celestialBody Uranus = new celestialBody("Uranus", 19.19, -320, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas);
     celestialBody Neptune = new celestialBody("Neptune", 30., -353, false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas);
+
+    //intilizing aliens
+    Alien alienOne = new Alien("Jordan", Jupiter, false);
+    Alien alienTwo = new Alien("Ab", Venus, false);
+    Alien alienThree = new Alien("Ash", Neptune, false);
+    Alien alienFour = new Alien("Lucy", Mars, true);
+
+    //Adding aliens to planets
+    Jupiter.getInfested(alienOne);
+    Venus.getInfested(alienTwo);
+    Neptune.getInfested(alienThree);
+    Mars.getInfested(alienFour);
 
     do{
             System.out.println("What do you wish do?");
@@ -152,11 +163,12 @@ public class GameLoop {
                     ship.go(Saturn);
                 } 
             System.out.println(ship.location.name + " appears " + ship.location.description); // print what you see 
+            if (!ship.location.inhabitants.isEmpty()){
+                System.out.println("You can see strange worm-like shapes from your ship's window. Are they alive?");
+            }
             }
 
             if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
-
-                //Account for body mentioned? right now if you type "land on mars" while at mercury it'll give you "landing on mercury"
 
                 boolean landSuccess = false; 
                 System.out.println("You engage your landing gears and begain your descent towards " + ship.location.name + ".");
@@ -175,7 +187,11 @@ public class GameLoop {
 
                 if (ship.location.surface == surfaceProperties.rock){
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
-                    landSuccess=true; }
+                    if (!ship.location.destroyed){
+                        landSuccess=true;
+                    } else{
+                        System.out.println("The surface seems too damaged to land.");
+                    }}
                 
 
                 if (landSuccess){
@@ -185,6 +201,11 @@ public class GameLoop {
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 
+            }
+        
+            else { // dialog to catch any phrases not included earlier 
+                System.out.println("I don't know what you mean. Try to 'go' or 'land.'");
+                System.out.println("");
             }
 
           } while (midgameSequence); //And user onBoard, glitched out when i tried lol
