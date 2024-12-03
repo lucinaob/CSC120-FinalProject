@@ -8,6 +8,7 @@ public class GameLoop {
     // This is a "flag" to let us know when the intro loop should end
     boolean introSequence = true;
     boolean midgameSequence = true;
+    boolean landSuccess;
 
     // We'll use this to get input from the user.
     Scanner userInput = new Scanner(System.in);
@@ -40,6 +41,20 @@ public class GameLoop {
     celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas);
     celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas);
     celestialBody Neptune = new celestialBody("Neptune", 30., false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas);
+
+
+    //initializing aliens
+    Alien alienOne = new Alien("Jordan", Jupiter, false);
+    Alien alienTwo = new Alien("Ab", Venus, false);
+    Alien alienThree = new Alien("Ash", Neptune, false);
+    Alien alienFour = new Alien("Lucy", Mars, true);
+
+    //Adding aliens to planets
+    Jupiter.getInfested(alienOne);
+    Venus.getInfested(alienTwo);
+    Neptune.getInfested(alienThree);
+    Mars.getInfested(alienFour);
+
 
     do{
             System.out.println("What do you wish do?");
@@ -134,7 +149,6 @@ public class GameLoop {
             
             userResponse = userInput.nextLine().toLowerCase(); 
             
-            //There must be a more efficient way to do this?
             if (userResponse.contains("go")){
                 if (userResponse.contains("mars")){
                     ship.go(Mars);}
@@ -165,7 +179,7 @@ public class GameLoop {
 
             if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
 
-                boolean landSuccess = false; 
+                landSuccess = false; 
                 System.out.println("You engage your landing gears and begain your descent towards " + ship.location.name + ".");
 
                 if (ship.location.surface == surfaceProperties.gas){ // you cannot land on a gas giant u fool
@@ -183,27 +197,35 @@ public class GameLoop {
                 if (ship.location.surface == surfaceProperties.rock){
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
                     if (!ship.location.destroyed){
+                        ship.land(ship.location);
                         landSuccess=true;
                     } else{
                         System.out.println("The surface seems too damaged to land.");
                     }}
                 
 
-                if (landSuccess){
-                    ship.land(ship.location); // land on location ship is at 
-                }}
+                do { 
+                    //methods and everything on planet
+                    System.out.println("What do you wish do?");
+                    userResponse = userInput.nextLine().toLowerCase();
+                    
+
+
+                } while (landSuccess);
+            
+            }
             
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 
             }
-        
-            else { // dialog to catch any phrases not included earlier 
-                System.out.println("I don't know what you mean. Try to 'go' or 'land.'");
-                System.out.println("");
-            }
 
-          } while (midgameSequence); //And user onBoard, glitched out when i tried lol
+            else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go")){
+                    System.out.println("I don't know what you mean. Try 'land' or 'go.'");  
+                    }
+
+          } while (midgameSequence);
+
         
         }
 }
