@@ -18,6 +18,7 @@ class celestialBody{
         this.surface = surface; 
         this.hasMoons = hasMoons; 
         this.moons = new ArrayList<>(); 
+        this.inhabitants = new ArrayList<>();
         if(this.description == null){
             this.description = "";
         }
