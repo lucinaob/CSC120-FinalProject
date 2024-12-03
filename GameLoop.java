@@ -21,19 +21,25 @@ public class GameLoop {
     System.out.println("You have no idea where you are."); 
 
     // initilizes ship, user, aliens 
-    celestialBody Earth = new celestialBody("Earth", 1., 273, true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock); 
+    celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock); 
+    Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
+    
+
     spaceShip ship = new spaceShip(30, 30, Earth); 
     User user = new User("name", Earth, 30); 
 
-    // initilizing other planets
-    //ORBITAL DISTANCE IS WRONG FOR ALL i didn't know what the right # was
-    celestialBody Mercury = new celestialBody("Mercury", 0.387, 800, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock);
-    celestialBody Venus = new celestialBody("Venus", 0.723, 870, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock);
-    celestialBody Mars = new celestialBody("Mars", 1.52, -85, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock);
-    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, -166, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. ", surfaceProperties.gas);
-    celestialBody Saturn = new celestialBody("Saturn", 9.5, -288, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas);
-    celestialBody Uranus = new celestialBody("Uranus", 19.19, -320, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas);
-    celestialBody Neptune = new celestialBody("Neptune", 30., -353, false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas);
+    // initilizing other planets + moons 
+    celestialBody Mercury = new celestialBody("Mercury", 0.387, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock);
+    celestialBody Venus = new celestialBody("Venus", 0.723, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock);
+    celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock);
+    
+    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas);
+    Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with stark red chasams. Something silvery glistens on the horizon", surfaceProperties.ice, Jupiter); 
+    Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
+
+    celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas);
+    celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas);
+    celestialBody Neptune = new celestialBody("Neptune", 30., false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas);
 
     do{
             System.out.println("What do you wish do?");
