@@ -21,7 +21,7 @@ public class GameLoop {
     System.out.println("You have no idea where you are."); 
 
     // initilizes ship, user, aliens 
-    celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock); 
+    celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
     Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
     
 
@@ -29,17 +29,20 @@ public class GameLoop {
     User user = new User("name", Earth, 30); 
 
     // initilizing other planets + moons 
-    celestialBody Mercury = new celestialBody("Mercury", 0.387, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock);
-    celestialBody Venus = new celestialBody("Venus", 0.723, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock);
-    celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock);
+    celestialBody Mercury = new celestialBody("Mercury", 0.387, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock, false);
+    celestialBody Venus = new celestialBody("Venus", 0.723, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock, false);
+    celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock, false);
     
-    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas);
+    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas, true);
     Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with stark red chasams. Something silvery glistens on the horizon", surfaceProperties.ice, Jupiter); 
     Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
 
-    celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas);
-    celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas);
-    celestialBody Neptune = new celestialBody("Neptune", 30., false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas);
+    Jupiter.addMoon(Europa);
+    Jupiter.addMoon(Ganymede); 
+
+    celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas, false);
+    celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas, false);
+    celestialBody Neptune = new celestialBody("Neptune", 30., false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas, false);
 
     do{
             System.out.println("What do you wish do?");
@@ -160,8 +163,17 @@ public class GameLoop {
             System.out.println(ship.location.name + " appears " + ship.location.description); // print what you see 
             }
 
-            if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
+            // if orbiting Jupiter, can land on moons 
+            if (userResponse.contains("go") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("ganymede")){
+                ship.go(Ganymede); 
+            }
 
+            if (userResponse.contains("go") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("europa")){
+                ship.go(Europa); 
+            }
+
+            if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){                
+                
                 //Account for body mentioned? right now if you type "land on mars" while at mercury it'll give you "landing on mercury"
 
                 boolean landSuccess = false; 
