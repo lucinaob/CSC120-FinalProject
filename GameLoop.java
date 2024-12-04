@@ -195,6 +195,11 @@ public class GameLoop {
 
             if (userResponse.contains("land") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("europa")){
                 ship.land(Europa); 
+                if (user.knowsCode){
+                    //End of game stuff
+                } else{
+                    //Print some kind of basic description here?
+                }
             }
 
             // if orbiting Earth, can go to and land on the moon
