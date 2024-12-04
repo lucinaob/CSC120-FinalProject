@@ -26,7 +26,7 @@ public class GameLoop {
     Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
     
 
-    spaceShip ship = new spaceShip(30, 30, Earth); 
+    spaceShip ship = new spaceShip(30, 100, Earth); 
     User user = new User("name", Earth, 30); 
 
     // initilizing other planets + moons 
@@ -47,10 +47,10 @@ public class GameLoop {
 
 
     //initializing aliens
-    Alien alienOne = new Alien("Jordan", Jupiter, false);
-    Alien alienTwo = new Alien("Ab", Venus, false);
-    Alien alienThree = new Alien("Ash", Neptune, false);
-    Alien alienFour = new Alien("Lucy", Mars, true);
+    Alien alienOne = new Alien("Jordan the Alien", Jupiter, false);
+    Alien alienTwo = new Alien("Ab the Alien", Venus, false);
+    Alien alienThree = new Alien("Ash the Alien", Neptune, false);
+    Alien alienFour = new Alien("Lucy the Alien", Mars, true);
 
     //Adding aliens to planets
     Jupiter.getInfested(alienOne);
@@ -189,13 +189,8 @@ public class GameLoop {
                 ship.go(Europa); 
             }
 
-            // if orbiting Jupiter, can land on moons 
-            if (userResponse.contains("go") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("ganymede")){
-                ship.go(Ganymede); 
-            }
-
-            if (userResponse.contains("go") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("europa")){
-                ship.go(Europa); 
+            if (userResponse.toLowerCase().contains("land") && !userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
+                System.out.println("You can't land on a planet you aren't near.");
             }
 
             if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){                
@@ -219,6 +214,10 @@ public class GameLoop {
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
                     if (!ship.location.destroyed){
                         ship.land(ship.location);
+                        if (!ship.location.inhabitants.isEmpty()){
+                            System.out.println("Now that you can see them better, those worm-like things are moving! They must be some kind of alien lifeform.");
+                            System.out.println("One isn't too far from where you just landed.");
+                        }
                         landSuccess=true;
                     } else{
                         System.out.println("The surface seems too damaged to land.");
@@ -227,15 +226,59 @@ public class GameLoop {
 
                 do { 
                     //methods and everything on planet
+                    Being localLife = ship.location.inhabitants.get(0);
                     System.out.println("What do you wish do?");
                     userResponse = userInput.nextLine().toLowerCase();
-                    
 
+                    if (userResponse.contains("board") && !userResponse.contains("un")){
+                        if (user.onBoard){
+                            System.out.println("You are already on board.");
+                        }  else{
+                            ship.board(user);
+                            System.out.println("Welcome back aboard!");
+                        }
+                    }
+
+                    if (userResponse.contains("unboard") && !userResponse.contains(" board")){
+                        if (!user.onBoard){
+                            System.out.println("You are already outside your ship.");
+                        } else{
+                            ship.unboard(user);
+                            System.out.println("You are now on the surface of " + ship.location.name);
+                            if (!ship.location.inhabitants.isEmpty()){
+                                System.out.println("While you were preparing to unboard, one of those worm things came right up to your ship!");
+                                System.out.println("Do you want to fight it, talk to it, or get back onboard?");
+                            }
+                        }
+                    }
+
+                    if (userResponse.contains("fight") || userResponse.contains("attack")){
+                        if(user.onBoard){
+                            System.out.println("Who are you going to fight? The wall?");
+                        } else{
+                            user.attack(localLife);
+                        }
+                    }
+
+                    if (userResponse.contains("talk")){
+                        if (user.onBoard){
+                            System.out.println("I know times are tough, but talking to the air is a step too far.");
+                        } else{
+                            user.talk(localLife); 
+                        }
+                    }
+
+                    if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
+                        if (user.onBoard){
+                            ship.getStatus();
+                        } else{
+                            System.out.println("You can't check the status when you're not on the ship!");
+                        }
+                    }
 
                 } while (landSuccess);
             
             }
-            
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                 ship.getStatus(); // get status at any time 

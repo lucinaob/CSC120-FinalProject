@@ -46,8 +46,8 @@ public class User extends Being{
 
         Random rand = new Random();
         int randomNumber = rand.nextInt(10) + 1;
-        being.getHurt(randomNumber); // sbubtracts hitpoints from user 
-        System.out.println(randomNumber + "hitpoints subtarcted from " + being.name);
+        being.getHurt(randomNumber); // subtracts hitpoints from user 
+        System.out.println(randomNumber + " hitpoints subtracted from " + being.name);
     }
 
     public void die(){
