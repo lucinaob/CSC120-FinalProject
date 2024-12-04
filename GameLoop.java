@@ -64,7 +64,7 @@ public class GameLoop {
             userResponse = userInput.nextLine().toLowerCase(); 
             // basic for now but I want to implement a running lsit of options as the game progresses somehow 
 
-            if (userResponse.split(" ", 2)[0].equals("look")){
+            if (userResponse.contains("look")){
                 if (userResponse.split(" ", 2)[1].equals("left")){
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
                     System.out.println("January 11th, 2036");
@@ -73,22 +73,22 @@ public class GameLoop {
                     System.out.println("");
                 }
 
-                else if (userResponse.split(" ", 2)[1].equals("right")){
+                else if (userResponse.contains("right")){
                         System.out.println("To your right is a shelf, filled with books. On the top shelf is a picture frame containing a picture of a small child holding a cat.");
                         System.out.println("");
                 }
 
-                else if (userResponse.split(" ", 2)[1].equals("backward") || userResponse.split(" ", 2)[1].equals("behind")){
+                else if (userResponse.contains("backward") || userResponse.contains("behind")){
                     System.out.println("Behind you is a metal room. It's dark, you can't see much from this vantage point.");
                     System.out.println("");
             }
 
-                else if (userResponse.split(" ", 2)[1].equals("up")){
+                else if (userResponse.contains("up")){
                     System.out.println("Above you is a metallic ceiling. Not much interesting is going on here.");
                     System.out.println("");
             }
 
-            else if (userResponse.split(" ", 2)[1].equals("down")){
+            else if (userResponse.contains("down")){
                 System.out.println("Below you is what appears to be a control panel. A simple joystick sits before you. Next to the joystick is a red button with the words 'EJECT'. ");
                 System.out.println("");
         }
@@ -189,6 +189,23 @@ public class GameLoop {
                 ship.go(Europa); 
             }
 
+            if (userResponse.contains("land") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("ganymede")){
+                ship.land(Ganymede); 
+            }
+
+            if (userResponse.contains("land") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("europa")){
+                ship.land(Europa); 
+            }
+
+            // if orbiting Earth, can go to and land on the moon
+            if  (userResponse.contains("go") && ship.location.name.equals("Earth") && userResponse.contains("moon")){
+                ship.go(moon);
+            }
+
+            if  (userResponse.contains("land") && ship.location.name.equals("Earth") && userResponse.contains("moon")){
+                ship.land(moon);
+            }
+
             if (userResponse.toLowerCase().contains("land") && !userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
                 System.out.println("You can't land on a planet you aren't near.");
             }
@@ -208,6 +225,7 @@ public class GameLoop {
 
                 if (ship.location.surface == surfaceProperties.ice){
                     System.out.println("As you descend towards " + ship.location.name + ", you don't notice much difference from the stark, interplanetary air. There is little atmosphere, and the surface is glistening in reflected light.");
+                    ship.land(ship.location);
                     landSuccess=true; }
 
                 if (ship.location.surface == surfaceProperties.rock){
