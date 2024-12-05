@@ -47,10 +47,10 @@ public class GameLoop {
 
 
     //initializing aliens
-    Alien alienOne = new Alien("Jordan the Alien", Jupiter, false);
-    Alien alienTwo = new Alien("Ab the Alien", Venus, false);
-    Alien alienThree = new Alien("Ash the Alien", Neptune, false);
-    Alien alienFour = new Alien("Lucy the Alien", Mars, true);
+    Alien alienOne = new Alien("Jordan the Alien", Jupiter, false, 50);
+    Alien alienTwo = new Alien("Ab the Alien", Venus, false, 20);
+    Alien alienThree = new Alien("Ash the Alien", Neptune, false, 15);
+    Alien alienFour = new Alien("Lucy the Alien", Mars, true, 30);
 
     //Adding aliens to planets
     Jupiter.getInfested(alienOne);
@@ -174,9 +174,9 @@ public class GameLoop {
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
                 } 
-            System.out.println(ship.location.name + " appears " + ship.location.description); // print what you see 
+
             if (!ship.location.inhabitants.isEmpty()){
-                System.out.println("You can see strange worm-like shapes from your ship's window. Are they alive?");
+                System.out.println("While you orbit the body, something appears to be moving...");
             }
             }
 
@@ -195,11 +195,6 @@ public class GameLoop {
 
             if (userResponse.contains("land") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("europa")){
                 ship.land(Europa); 
-                if (user.knowsCode){
-                    //End of game stuff
-                } else{
-                    //Print some kind of basic description here?
-                }
             }
 
             // if orbiting Earth, can go to and land on the moon
@@ -243,13 +238,17 @@ public class GameLoop {
                         }
                         landSuccess=true;
                     } else{
-                        System.out.println("The surface seems too damaged to land.");
+                        System.out.println("The surface seems too damaged to land...");
                     }}
                 
 
                 do { 
-                    //methods and everything on planet
-                    Being localLife = ship.location.inhabitants.get(0);
+
+                    Alien localLife = new Alien("bacteria", ship.location, false, 2);  // default local life 
+                    if (!ship.location.inhabitants.isEmpty()){  // if a worm is there reassign local life to the worm 
+                        localLife = ship.location.inhabitants.get(0);
+                    }
+        
                     System.out.println("What do you wish do?");
                     userResponse = userInput.nextLine().toLowerCase();
 
@@ -258,19 +257,37 @@ public class GameLoop {
                             System.out.println("You are already on board.");
                         }  else{
                             ship.board(user);
-                            System.out.println("Welcome back aboard!");
+                            landSuccess= false; // reassigns to get out of while loop
                         }
                     }
 
                     if (userResponse.contains("unboard") && !userResponse.contains(" board")){
                         if (!user.onBoard){
                             System.out.println("You are already outside your ship.");
-                        } else{
+                        } 
+                        else{
                             ship.unboard(user);
                             System.out.println("You are now on the surface of " + ship.location.name);
                             if (!ship.location.inhabitants.isEmpty()){
-                                System.out.println("While you were preparing to unboard, one of those worm things came right up to your ship!");
+                                System.out.println("You land, and immediatly sense something is off. A shadow looms over your ship...");
+                                System.out.println("You turn to see what looks like... a giant earthworm?");
                                 System.out.println("Do you want to fight it, talk to it, or get back onboard?");
+                            }
+
+                            if (ship.location.name.equals("Europa")){
+                                if (userResponse.toLowerCase().contains("go") && userResponse.toLowerCase().contains("silver")){
+                                    System.out.println("You walk towards the silver thing in the distance. As you get closer, you see a door, protruding from the ice.");
+                
+                                    if (user.knowsCode){
+                                        System.out.println("Wait! you have a key!");
+                                        //End of game stuff
+                                    } 
+                                    else{
+                                        System.out.println("Suprise, suprise. the door is locked.");
+                                        //Print some kind of basic description here?
+                                    }
+                                
+                                }
                             }
                         }
                     }
@@ -279,17 +296,37 @@ public class GameLoop {
                         if(user.onBoard){
                             System.out.println("Who are you going to fight? The wall?");
                         } else{
-                            user.attack(localLife);
+                            do{
+                                user.attack(localLife);
+                            } while(localLife.alive); // until it dies you can fight it 
+
+                            if (!localLife.alive && !localLife.hasKey){
+                                System.out.println("The earthworm-like being lets out a shrill cry, and then, almost like a projection, dissapates.");
+                                System.out.println("...");
+                                System.out.println("Well, that was weird.");
+                            }
+                            else if (!localLife.alive && localLife.hasKey){ // if has the key, 
+                                System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
+                                System.out.println( localLife.name + ": Now Human, let's not fight. How about a conversation?");
                         }
                     }
+                }
 
                     if (userResponse.contains("talk")){
                         if (user.onBoard){
                             System.out.println("I know times are tough, but talking to the air is a step too far.");
-                        } else{
+                        } 
+                        else if (!localLife.hasKey){ // does not have key talk
                             user.talk(localLife); 
                         }
-                    }
+
+                        else if (localLife.hasKey){
+                            userResponse = userInput.nextLine().toLowerCase(); 
+                            user.talk(localLife, userResponse); 
+                        }
+
+                        }
+                    
 
                     if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                         if (user.onBoard){

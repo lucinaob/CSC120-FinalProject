@@ -4,7 +4,7 @@ class celestialBody{
     String name;
     double orbitalRadius; 
     surfaceProperties surface; // description of surface 
-    ArrayList<Being> inhabitants; // contains inhabitants as objects bc different classes
+    ArrayList<Alien> inhabitants; // contains inhabitants as objects bc different classes
     ArrayList<Moon> moons; // contains inhabitants as objects bc different classes
     boolean destroyed; 
     String description; 
@@ -24,13 +24,13 @@ class celestialBody{
         }
     }
 
-    public void getInfested(Being alien){ // alien infests 
+    public void getInfested(Alien alien){ // alien infests 
         this.inhabitants.add(alien); 
     }
 
-    public void landOn(User user){ // person lands on ship
-        this.inhabitants.add(user);
-    }
+    // public void landOn(User user){ // person lands on ship
+    //     this.inhabitants.add(user);
+    // }
 
     public void addMoon(Moon moon){
         this.moons.add(moon); 

@@ -40,6 +40,8 @@ class spaceShip{
                 fuel -= distance;
                 this.location = bodyName;
                 System.out.println("You are now in orbit about " + bodyName.name + ".");
+                System.out.println(bodyName.name + " appears " + bodyName.description); // print what you see 
+
             }
         }
         
