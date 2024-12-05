@@ -4,7 +4,7 @@ class spaceShip{
  //   double orbitalDistance;
     celestialBody location; 
 
-    public spaceShip(int rations, double fuel, celestialBody location){
+    public spaceShip(double fuel, celestialBody location){
         this.fuel = fuel;
         this.location = location;
     }

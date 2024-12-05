@@ -19,18 +19,6 @@ public class User extends Being{
         this.knowsCode = true; // CHANGE 
     }
 
-    // public void eat(){
-    //     if (spaceShip.rations == 0){
-    //         System.out.println("You are out of rations. There is nothing to eat.");
-    //     } else{
-    //         System.out.println("Eating rations...");
-    //         spaceShip.rations -= 1;
-    //         System.out.println("RATION LEVEL: " + spaceShip.rations);
-    //     } if (spaceShip.rations < 3 && spaceShip.rations > 0){
-    //         System.out.println("You're running low on rations. It may be time to rethink your strategy...");
-    //     }
-    // }
-
     static String talkResponses(){ 
         Random rand = new Random();
         int number = rand.nextInt(responses.length);
