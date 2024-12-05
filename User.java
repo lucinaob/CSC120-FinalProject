@@ -40,7 +40,7 @@ public class User extends Being{
 
     public void talk(Alien name){
         System.out.print(ANSI_GREEN);
-        System.out.println(name.name.toUpperCase() + ": " + talkResponses());
+        System.out.println(name.name + ": " + talkResponses());
         System.out.print(ANSI_RESET);
         }
     

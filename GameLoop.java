@@ -320,13 +320,14 @@ public class GameLoop {
                             System.out.println("Who are you going to fight? The wall?");
                         } 
                         
-                        else{
+                        else if (localLife.alive) {
+
+                            if (localLife.hitpoints <= 0){
+                                localLife.alive = false;
+                            }
 
                             if (localLife.alive){ /// why wrong 
                             user.attack(localLife);
-
-                                System.out.println("Alien hitpoints: " + localLife.hitpoints);
-                                System.out.println("User hitpoints: " + localLife.hitpoints);
 
                                 if (!user.alive){
                                     midgameSequence = false; 
@@ -341,12 +342,17 @@ public class GameLoop {
 
                                  else if (!localLife.alive && localLife.hasKey){ // if has the key, 
                                 System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
-                                System.out.println( localLife.name + ": Now Human, let's not fight. How about a conversation?");
+                                System.out.println(User.ANSI_PURPLE +localLife.name + ": Now Human, let's not fight. How about a conversation?" + User.ANSI_RESET);
                                 }
+                    } else if (!localLife.alive){
+                        if (localLife.hasKey){
+                            System.out.println(User.ANSI_PURPLE +localLife.name +  ": Didn't you hear me? Let's not fight." + User.ANSI_RESET);
+                        } else{
+                            System.out.println("It's already gone!");
+                        }
                     }
                 }
                  
-                }
 
                     if (userResponse.contains("talk")){
                         if (user.onBoard || localLife.name.equals("bacteria")){
