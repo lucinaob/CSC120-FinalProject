@@ -10,7 +10,7 @@ public class User extends Being{
     public static String[] responses = {
         "Sup, brah?",
         "Our homeworld... You couldn't image that kind of destruction.",
-        "This is our promised land."
+        "I don't know anything. Ask Red.", // hint to go to mars worm 
     };
 
     public User(String name, celestialBody location, int hitpoints){
@@ -19,17 +19,17 @@ public class User extends Being{
         this.knowsCode = true; // CHANGE 
     }
 
-    public void eat(){
-        if (spaceShip.rations == 0){
-            System.out.println("You are out of rations. There is nothing to eat.");
-        } else{
-            System.out.println("Eating rations...");
-            spaceShip.rations -= 1;
-            System.out.println("RATION LEVEL: " + spaceShip.rations);
-        } if (spaceShip.rations < 3 && spaceShip.rations > 0){
-            System.out.println("You're running low on rations. It may be time to rethink your strategy...");
-        }
-    }
+    // public void eat(){
+    //     if (spaceShip.rations == 0){
+    //         System.out.println("You are out of rations. There is nothing to eat.");
+    //     } else{
+    //         System.out.println("Eating rations...");
+    //         spaceShip.rations -= 1;
+    //         System.out.println("RATION LEVEL: " + spaceShip.rations);
+    //     } if (spaceShip.rations < 3 && spaceShip.rations > 0){
+    //         System.out.println("You're running low on rations. It may be time to rethink your strategy...");
+    //     }
+    // }
 
     static String talkResponses(){ 
         Random rand = new Random();

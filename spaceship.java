@@ -1,12 +1,10 @@
 class spaceShip{
     
-    static int rations;
     double fuel;
  //   double orbitalDistance;
     celestialBody location; 
 
     public spaceShip(int rations, double fuel, celestialBody location){
-        this.rations = rations;
         this.fuel = fuel;
         this.location = location;
     }
@@ -69,7 +67,7 @@ class spaceShip{
     }
 
     public void getStatus(String place){
-        System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations + "\n + LOCATION: " + this.location.name); 
+        System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + LOCATION: " + this.location.name); 
         if (place.equals("introSequence")){
             System.out.println("OPTIONS:\n + Look \n + Move \n + Examine");
         } else if (place.equals("midgameSequence")){

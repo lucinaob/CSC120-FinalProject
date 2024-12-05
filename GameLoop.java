@@ -9,7 +9,6 @@ public class GameLoop {
     boolean introSequence = true;
     boolean midgameSequence = true;
     boolean landSuccess = false;
-    boolean endgameSequence = false; 
 
     // We'll use this to get input from the user.
     Scanner userInput = new Scanner(System.in);
@@ -22,6 +21,10 @@ public class GameLoop {
     System.out.println("The air is extremly still.");
     System.out.println("Before you is a dark expanse. Metallic walls surround you.");
     System.out.println("You have no idea where you are."); 
+
+    System.out.println("");
+    System.out.println("OPTIONS: \n + look [up/left/right/down] \n + move  \n + examine");
+    System.out.println("");
 
     // initilizes ship, user, aliens 
     celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
@@ -53,12 +56,11 @@ public class GameLoop {
     Alien alienThree = new Alien("Ash the Alien", Neptune, false, 15);
     Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
 
-    //Adding aliens to planets
-    Jupiter.getInfested(alienOne);
+    //Adding aliens to planets solid ones 
+    Ganymede.getInfested(alienOne);
     Venus.getInfested(alienTwo);
-    Neptune.getInfested(alienThree);
+    moon.getInfested(alienThree);
     Mars.getInfested(alienFour);
-
 
     do{
             System.out.println("1. What do you wish do?");
@@ -71,7 +73,7 @@ public class GameLoop {
                 if (userResponse.split(" ", 2)[1].equals("left")){
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
                     System.out.println("January 11th, 2036");
-                    System.out.println("09:31 UTC");
+                    System.out.println("17:31 UTC");
                     ship.getStatus("introSequence"); 
                     System.out.println("");
                 }
@@ -106,28 +108,29 @@ public class GameLoop {
 
                 if (userResponse.contains("book")){
                     System.out.println("The books are written mostly in a script you cannot understand. Some have pictures, but most are just blocks of unfamilair text.");
+                    System.out.println("One book appears to be written in a language you can understand");
+                    System.out.println("The title reads: On the Habitability of the Jovian Moons");
                     System.out.println("");
                 }
 
                 else if (userResponse.contains("photo") || userResponse.contains("picture")){
-                    System.out.println("The photo is old, but in pristine condition. ");
+                    System.out.println("The photo is old, but in pristine condition.");
                     System.out.println("The child looks a little familiar.");
                     System.out.println("");
                 }
 
                     }
 
-            else if (userResponse.split(" ", 2)[0].equals("hit") || userResponse.split(" ", 2)[0].equals("press")){
+            else if (userResponse.contains("eject") || userResponse.contains("button") || userResponse.contains("press")){
                 if (userResponse.contains("eject")){
                     System.out.println("You hit the EJECT button once, twice, three times, but nothing happens. It doesn't seem to work.");
                     System.out.println("");  // incredible
-                    //Or could just kill 'em lol
                 }
                 System.out.println("I don't know what you mean. What do you want to press?"); // this doesn't work I think i put it in the wrong place
                 System.out.println("");
             }
 
-            if (userResponse.contains("move") || userResponse.contains("joystick")){
+            else if (userResponse.contains("move") || userResponse.contains("joystick")){
                 System.out.println("You move the joystick, and you feel the ship jerk to the side. ");
                 System.out.println("Suddenly, the dark expanse before you is interrupted by a familiar sight");
                 System.out.println("A large blue and green body, not unlike images of Earth that you have seen before, sits still before you.");
@@ -135,7 +138,6 @@ public class GameLoop {
                 System.out.println("...");
                 System.out.println("");
                 introSequence = false; 
-
 
         } 
 
@@ -150,6 +152,8 @@ public class GameLoop {
             System.out.println("and most importantly... How long have you been unconcious?");
             System.out.println("");
             System.out.println("What do you do? Where do you go?");
+            System.out.println("");
+            System.out.println("OPTIONS: + go to [body name] \n + land on [body name] \n        + unboard \n        + board");
             System.out.println("");
             // grabs user input 
         do { 
@@ -168,6 +172,7 @@ public class GameLoop {
                 }
                 else if (userResponse.contains("jupiter")){
                     ship.go(Jupiter);
+                    System.out.println("As you approach Jupiter, two moons - Ganymede and Europa - come into view.");
                 } 
                 else if (userResponse.contains("neptune")){
                     ship.go(Neptune);
@@ -250,13 +255,20 @@ public class GameLoop {
                     }}
                 
                if (midgameSequence){
+
                 do { 
+
+                    System.out.println("");
+                    System.out.println("OPTIONS: \n + board \n + talk \n + fight \n ");
+                    System.out.println("");
+
                     Alien localLife = new Alien("bacteria", ship.location, false, 2);  // default local life 
                     if (!ship.location.inhabitants.isEmpty()){  // if a worm is there reassign local life to the worm 
                         localLife = ship.location.inhabitants.get(0);
                     }
         
-                    System.out.println("What do you wish do?");
+                    System.out.println("2. What do you wish do?");
+                    System.out.println("");
                     userResponse = userInput.nextLine().toLowerCase();
 
                     if (userResponse.contains("board") && !userResponse.contains("un")){
@@ -289,7 +301,7 @@ public class GameLoop {
                         System.out.println("You walk towards the silver thing in the distance. As you get closer, you see a door, protruding from the ice.");
     
                         if (user.knowsCode){
-                            System.out.println("Wait! you have a key!");} 
+                            System.out.println("Wait! you have a key!");
 
                         userResponse = userInput.nextLine().toLowerCase(); 
 
@@ -301,9 +313,9 @@ public class GameLoop {
                             System.out.println("'going down!'");
                             System.out.println("...");
                             System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
-                            endgameSequence = true;   
+                            midgameSequence = false;   
 
-                        }
+                        } } 
                             //End of game stuff
                         
                         else if (!user.knowsCode){
