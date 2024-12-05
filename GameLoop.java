@@ -3,6 +3,12 @@ import java.util.Scanner;
 
 public class GameLoop {
 
+    boolean introSequence;
+
+    public boolean getIntroSequence(){
+        return introSequence;
+    }
+
     public static void main(String[] args) {
 
     // This is a "flag" to let us know when the intro loop should end
@@ -90,10 +96,10 @@ public class GameLoop {
                     System.out.println("");
             }
 
-            else if (userResponse.contains("down")){
-                System.out.println("Below you is what appears to be a control panel. A simple joystick sits before you. Next to the joystick is a red button with the words 'EJECT'. ");
-                System.out.println("");
-        }
+                else if (userResponse.contains("down")){
+                    System.out.println("Below you is what appears to be a control panel. A simple joystick sits before you. Next to the joystick is a red button with the words 'EJECT'. ");
+                    System.out.println("");
+            }
             }
 
             else if (userResponse.split(" ", 2)[0].equals("examine")){
