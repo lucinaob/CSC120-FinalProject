@@ -61,6 +61,8 @@ public class GameLoop {
 
     do{
             System.out.println("What do you wish do?");
+            System.out.println("");
+
             userResponse = userInput.nextLine().toLowerCase(); 
             // basic for now but I want to implement a running lsit of options as the game progresses somehow 
 
@@ -136,9 +138,9 @@ public class GameLoop {
 
         } 
 
-        else { // dialog to catch any phrases not included earlier 
+        else if(!userResponse.contains("look") && !userResponse.contains("move") && !userResponse.contains("examine") && !userResponse.contains("joystick")){
+           
             System.out.println("I don't know what you mean. Try to 'look,' 'move,' or 'examine'");
-            System.out.println("");
         }
 
         } while (introSequence); 
@@ -367,7 +369,7 @@ public class GameLoop {
             else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")){
                     System.out.println("I don't know what you mean. Try 'land' or 'go.'");  
                     }
-
+            System.out.println("");
           } while (midgameSequence);
 
         
