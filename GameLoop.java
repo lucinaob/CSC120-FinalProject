@@ -283,20 +283,23 @@ public class GameLoop {
                         System.out.println("You walk towards the silver thing in the distance. As you get closer, you see a door, protruding from the ice.");
     
                         if (user.knowsCode){
-                            System.out.println("Wait! you have a key!");
-                            if (userResponse.toLowerCase().contains("use") || userResponse.toLowerCase().contains("open")){
-                                System.out.println("You insert the key into the hole, and turn the knob.");
-                                System.out.println("The door opens to reveal a staircase, leading down.");
-                                System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
-                                System.out.println("You enter the elevator, and press the only button there.");
-                                System.out.println("'going down!'");
-                                System.out.println("...");
-                                System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
+                            System.out.println("Wait! you have a key!");} 
 
-                            }
+                        userResponse = userInput.nextLine().toLowerCase(); 
+
+                        if (userResponse.toLowerCase().trim().contains("open") && user.knowsCode){
+                            System.out.println("You insert the key into the hole, and turn the knob.");
+                            System.out.println("The door opens to reveal a staircase, leading down.");
+                            System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
+                            System.out.println("You enter the elevator, and press the only button there.");
+                            System.out.println("'going down!'");
+                            System.out.println("...");
+                            System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
+
+                        }
                             //End of game stuff
-                        } 
-                        else{
+                        
+                        else if (!user.knowsCode){
                             System.out.println("Suprise, suprise. the door is locked.");
                             System.out.println("Maybe the key is somewhere...");
                             System.out.println("The solar system isn't that big, right?");
@@ -354,7 +357,7 @@ public class GameLoop {
                         }
                     }
 
-                    else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board")){
+                    else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open")){
                     System.out.println("I don't know what you mean. Try 'talk', 'fight', 'board/unboard'");
                     }
 
