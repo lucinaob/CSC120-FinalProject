@@ -68,11 +68,12 @@ class spaceShip{
         }
     }
 
-    public void getStatus(){
+    public void getStatus(String place){
         System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + Rations = " + this.rations + "\n + LOCATION: " + this.location.name); 
-        System.out.println("OPTIONS: \n + Go\n + Land\n + Board\n + Unboard\n + Status");
-        if (GameLoop.getIntroSequence()){
-            System.out.println(" + Look \n + Move \n + Explore");
+        if (place.equals("introSequence")){
+            System.out.println("OPTIONS:\n + Look \n + Move \n + Examine");
+        } else if (place.equals("midgameSequence")){
+            System.out.println("OPTIONS: \n + Go\n + Land\n + Status");
         }
     }
 }
