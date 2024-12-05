@@ -256,11 +256,11 @@ public class GameLoop {
                 
                if (midgameSequence){
 
-                do { 
+                System.out.println("");
+                System.out.println("OPTIONS: \n + unboard \n + board \n + talk \n + fight \n ");
+                System.out.println("");
 
-                    System.out.println("");
-                    System.out.println("OPTIONS: \n + board \n + talk \n + fight \n ");
-                    System.out.println("");
+                do { 
 
                     Alien localLife = new Alien("bacteria", ship.location, false, 2);  // default local life 
                     if (!ship.location.inhabitants.isEmpty()){  // if a worm is there reassign local life to the worm 
@@ -297,7 +297,7 @@ public class GameLoop {
                     }
                             
 
-                    if (ship.location.name.equals("Europa") && userResponse.toLowerCase().trim().contains("examine")){
+                    if (ship.location.name.equals("Europa") && (userResponse.toLowerCase().trim().contains("door") || userResponse.toLowerCase().trim().contains("silver"))){
                         System.out.println("You walk towards the silver thing in the distance. As you get closer, you see a door, protruding from the ice.");
     
                         if (user.knowsCode){
@@ -354,11 +354,11 @@ public class GameLoop {
 
                                  else if (!localLife.alive && localLife.hasKey){ // if has the key, 
                                 System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
-                                System.out.println(User.ANSI_PURPLE +localLife.name + ": Now Human, let's not fight. How about a conversation?" + User.ANSI_RESET);
+                                System.out.println(User.ANSI_RED +localLife.name + ": Now Human, let's not fight. How about a conversation?" + User.ANSI_RESET);
                                 }
                     } else if (!localLife.alive){
                         if (localLife.hasKey){
-                            System.out.println(User.ANSI_PURPLE +localLife.name +  ": Didn't you hear me? Let's not fight." + User.ANSI_RESET);
+                            System.out.println(User.ANSI_RED +localLife.name +  ": Didn't you hear me? Let's not fight." + User.ANSI_RESET);
                         } else{
                             System.out.println("It's already gone!");
                         }

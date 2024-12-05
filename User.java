@@ -4,7 +4,7 @@ public class User extends Being{
 
     boolean knowsCode; // boolean to represent if the user has found out the truth! 
     boolean onBoard; //should this be in ship or person class? should be wherever board() is
-    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_RED = "\u001B31;"; 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static String[] responses = {
@@ -47,11 +47,11 @@ public class User extends Being{
     // overload! 
     public void talk(Alien name, String dialog){
 
-            System.out.println(ANSI_PURPLE + "Greetings");
+            System.out.println(ANSI_RED + "Greetings");
             System.out.println("...");
 
             if (dialog.toLowerCase().contains("please")){
-                System.out.println(ANSI_PURPLE + "Fine... I'll tell you where to go. But only because you asked nicely.");
+                System.out.println(ANSI_RED + "Fine... I'll tell you where to go. But only because you asked nicely.");
                 System.out.println("There is a moon in the distance.");
                 System.out.println("I dropped off what was rest of your lot there");
                 System.out.println("Of course, they didn't seem to like it much.");
