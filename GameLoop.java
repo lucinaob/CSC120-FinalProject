@@ -3,12 +3,6 @@ import java.util.Scanner;
 
 public class GameLoop {
 
-    boolean introSequence;
-
-    public boolean getIntroSequence(){
-        return introSequence;
-    }
-
     public static void main(String[] args) {
 
     // This is a "flag" to let us know when the intro loop should end
@@ -22,6 +16,7 @@ public class GameLoop {
     // Storage for user's responses
     String userResponse = "";
 
+    System.out.println(User.ANSI_RESET);
     System.out.println("...");
     System.out.println("The air is extremly still.");
     System.out.println("Before you is a dark expanse. Metallic walls surround you.");
@@ -77,7 +72,7 @@ public class GameLoop {
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
                     System.out.println("January 11th, 2036");
                     System.out.println("09:31 UTC");
-                    ship.getStatus(); 
+                    ship.getStatus("introSequence"); 
                     System.out.println("");
                 }
 
@@ -155,6 +150,7 @@ public class GameLoop {
             System.out.println("and most importantly... How long have you been unconcious?");
             System.out.println("");
             System.out.println("What do you do? Where do you go?");
+            System.out.println("");
             // grabs user input 
         do { 
             
@@ -258,6 +254,7 @@ public class GameLoop {
                     }
         
                     System.out.println("What do you wish do?");
+                    System.out.println("");
                     userResponse = userInput.nextLine().toLowerCase();
 
                     if (userResponse.contains("board") && !userResponse.contains("un")){
@@ -280,6 +277,7 @@ public class GameLoop {
                                 System.out.println("You land, and immediatly sense something is off. A shadow looms over your ship...");
                                 System.out.println("You turn to see what looks like... a giant earthworm?");
                                 System.out.println("Do you want to fight it, talk to it, or get back onboard?");
+                                System.out.println("");
                                 }
                             }
                     }
@@ -315,7 +313,7 @@ public class GameLoop {
                     }
 
                     if (userResponse.contains("fight") || userResponse.contains("attack")){
-                        if(user.onBoard){
+                        if(user.onBoard || localLife.name.equals("bacteria")){
                             System.out.println("Who are you going to fight? The wall?");
                         } else{
 
@@ -332,7 +330,7 @@ public class GameLoop {
 
                                  else if (!localLife.alive && localLife.hasKey){ // if has the key, 
                                 System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
-                                System.out.println( localLife.name + ": Now Human, let's not fight. How about a conversation?");
+                                System.out.println( localLife.name.toUpperCase() + ": Now Human, let's not fight. How about a conversation?");
                                 }
                     }
                 }
@@ -340,7 +338,7 @@ public class GameLoop {
                 }
 
                     if (userResponse.contains("talk")){
-                        if (user.onBoard){
+                        if (user.onBoard || localLife.name.equals("bacteria")){
                             System.out.println("I know times are tough, but talking to the air is a step too far.");
                         } 
                         else if (!localLife.hasKey){ // does not have key talk
@@ -348,6 +346,7 @@ public class GameLoop {
                         }
 
                         else if (localLife.hasKey){
+                            System.out.println("What do you want to say? ");
                             userResponse = userInput.nextLine().toLowerCase(); 
                             user.talk(localLife, userResponse); 
                         }
@@ -357,7 +356,7 @@ public class GameLoop {
 
                     if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                         if (user.onBoard){
-                            ship.getStatus();
+                            ship.getStatus("onBody");
                         } else{
                             System.out.println("You can't check the status when you're not on the ship!");
                         }
@@ -372,7 +371,7 @@ public class GameLoop {
             }
 
             if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
-                ship.getStatus(); // get status at any time 
+                ship.getStatus("midgameSequence"); // get status at any time 
             }
 
             else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")){
