@@ -1,7 +1,7 @@
 public class Being {
     String name; 
     boolean alive;
-    static int hitpoints; 
+    int hitpoints; 
     celestialBody location; 
 
     public Being(String name, celestialBody location, int hitpoints){

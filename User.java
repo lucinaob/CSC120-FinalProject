@@ -8,7 +8,7 @@ public class User extends Being{
     public User(String name, celestialBody location, int hitpoints){
         super(name, location, hitpoints);
         this.onBoard = true;
-        this.knowsCode = false;
+        this.knowsCode = true; // CHANGE 
     }
 
     public void eat(){
@@ -59,12 +59,19 @@ public class User extends Being{
 
         Random rand = new Random();
         int randomNumber = rand.nextInt(10) + 1;
-        being.getHurt(randomNumber); // subtracts hitpoints from user 
+        
         if (randomNumber > 5){
             System.out.println("You strike " + being.name + ", and it lets out a loud cry... (wait, I thought there was no noise in space?)");
+            being.getHurt(randomNumber); // subtracts hitpoints from user 
+            if (being.hitpoints <= 0){ //kill if hitpoints decrease too much
+                being.die(); 
+            }
         }
+
         else if (randomNumber <= 5){
             System.out.println("You strike " + being.name + ", and it looks at you, growing angry.");
+            System.out.println( being.name + "lifts its tail and swings at you, knocking you over. ouch!");
+            this.hitpoints -= rand.nextInt(10) + 1; // lose a random number of hitpoints.
         }
 
        // System.out.println(randomNumber + " hitpoints subtracted from " + being.name);
