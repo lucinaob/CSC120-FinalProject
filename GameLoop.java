@@ -3,18 +3,13 @@ import java.util.Scanner;
 
 public class GameLoop {
 
-    boolean introSequence;
-
-    public boolean getIntroSequence(){
-        return introSequence;
-    }
-
     public static void main(String[] args) {
 
     // This is a "flag" to let us know when the intro loop should end
     boolean introSequence = true;
     boolean midgameSequence = true;
-    boolean landSuccess;
+    boolean landSuccess = false;
+    boolean endgameSequence = false; 
 
     // We'll use this to get input from the user.
     Scanner userInput = new Scanner(System.in);
@@ -30,7 +25,6 @@ public class GameLoop {
     // initilizes ship, user, aliens 
     celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
     Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
-    
 
     spaceShip ship = new spaceShip(30, 100, Earth); 
     User user = new User("name", Earth, 30); 
@@ -66,7 +60,7 @@ public class GameLoop {
 
 
     do{
-            System.out.println("What do you wish do?");
+            System.out.println("1. What do you wish do?");
             System.out.println("");
 
             userResponse = userInput.nextLine().toLowerCase(); 
@@ -227,16 +221,20 @@ public class GameLoop {
                     System.out.println("As you descend towards " + ship.location.name + ", the air grows dense and hazy, and you feel a stong graviational pull.");
                     System.out.println("The walls around you begin to cave in as the outside haze closes in.");
                     System.out.println("You feel crushed under the extreme gravity as the ship's power begins to fade...");
-                    user.die();  // rip 
+                  //  endgameSequence = true;   // rip 
+                    user.die(); 
+                    midgameSequence = false; 
+                    landSuccess = false; 
+
                     // want to have some end sequence class we can call from gameloop class I think to put when the user dies 
                 }
 
-                if (ship.location.surface == surfaceProperties.ice){
+                else if (ship.location.surface == surfaceProperties.ice){
                     System.out.println("As you descend towards " + ship.location.name + ", you don't notice much difference from the stark, interplanetary air. There is little atmosphere, and the surface is glistening in reflected light.");
                     ship.land(ship.location);
                     landSuccess=true; }
 
-                if (ship.location.surface == surfaceProperties.rock){
+                else if (ship.location.surface == surfaceProperties.rock){
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
                     if (!ship.location.destroyed){
                         ship.land(ship.location);
@@ -249,15 +247,14 @@ public class GameLoop {
                         System.out.println("The surface seems too damaged to land...");
                     }}
                 
-
+               if (midgameSequence){
                 do { 
-
                     Alien localLife = new Alien("bacteria", ship.location, false, 2);  // default local life 
                     if (!ship.location.inhabitants.isEmpty()){  // if a worm is there reassign local life to the worm 
                         localLife = ship.location.inhabitants.get(0);
                     }
         
-                    System.out.println("What do you wish do?");
+                    System.out.println("2. What do you wish do?");
                     userResponse = userInput.nextLine().toLowerCase();
 
                     if (userResponse.contains("board") && !userResponse.contains("un")){
@@ -301,6 +298,7 @@ public class GameLoop {
                             System.out.println("'going down!'");
                             System.out.println("...");
                             System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
+                            endgameSequence = true;   
 
                         }
                             //End of game stuff
@@ -317,27 +315,36 @@ public class GameLoop {
                     if (userResponse.contains("fight") || userResponse.contains("attack")){
                         if(user.onBoard){
                             System.out.println("Who are you going to fight? The wall?");
-                        } else{
+                        } 
+                        
+                        else{
 
                             if (localLife.alive){ /// why wrong 
                             user.attack(localLife);
-                            System.out.println(localLife.hitpoints);
-                            System.out.println(localLife.alive);
-                             
-                                if (!localLife.alive && !localLife.hasKey){
-                                System.out.println("The earthworm-like being lets out a shrill cry, and then, almost like a projection, dissapates.");
-                                System.out.println("...");
-                                System.out.println("Well, that was weird.");
-                                }
 
-                                 else if (!localLife.alive && localLife.hasKey){ // if has the key, 
-                                System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
-                                System.out.println( localLife.name + ": Now Human, let's not fight. How about a conversation?");
-                                }
+                                System.out.println("Alien hitpoints: " + localLife.hitpoints);
+                                System.out.println("User hitpoints: " + localLife.hitpoints);
+
+                                if (!user.alive){
+                                    midgameSequence = false; 
+                                    System.out.println("The alien strikes you, and it really hurts... you collapse to the ground!");
+                                } } 
+                             
+                            if (user.alive && !localLife.alive && !localLife.hasKey){
+                            System.out.println("The earthworm-like being lets out a shrill cry, and then, almost like a projection, dissapates.");
+                            System.out.println("...");
+                            System.out.println("Well, that was weird.");
+                            }
+
+                            else if (user.alive && !localLife.alive && localLife.hasKey){ // if has the key, 
+                            System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
+                            System.out.println( localLife.name + ": Now Human, let's not fight. How about a conversation?");
+                            }
+                        }
                     }
-                }
+                
                  
-                }
+                
 
                     if (userResponse.contains("talk")){
                         if (user.onBoard){
@@ -352,8 +359,7 @@ public class GameLoop {
                             user.talk(localLife, userResponse); 
                         }
 
-                        }
-                    
+                    }
 
                     if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
                         if (user.onBoard){
@@ -367,7 +373,7 @@ public class GameLoop {
                     System.out.println("I don't know what you mean. Try 'talk', 'fight', 'board/unboard'");
                     }
 
-                } while (landSuccess);
+                } while (landSuccess && midgameSequence); }
             
             }
 
@@ -379,8 +385,26 @@ public class GameLoop {
                     System.out.println("I don't know what you mean. Try 'land' or 'go.'");  
                     }
             System.out.println("");
+
           } while (midgameSequence);
+        
+        
+        if (user.alive){
+            System.out.println("...");
+            System.out.println("SUPRISE!");
+            System.out.println("you stand in shock as your friends and family cheer for you. There is a large cake on the table.");
+            System.out.println("You look down, and see you are wearing solar system print pajamas");
+            System.out.println("Well. That was a weird dream, you think.");
+        }
+
+        else {
+            System.out.println("You wake up in a cold sweat... in your childhood bedroom? ");
+            System.out.println("The clock reads 3:14 AM.");
+            System.out.println("You should go back to sleep.");
+        }
+
+        }
 
         
         }
-}
+

@@ -57,9 +57,13 @@ public class User extends Being{
 
     public void attack(Being being){
 
+        if (this.hitpoints <= 0){
+            this.die(); 
+        }
+        
         Random rand = new Random();
         int randomNumber = rand.nextInt(10) + 1;
-        
+
         if (randomNumber > 5){
             System.out.println("You strike " + being.name + ", and it lets out a loud cry... (wait, I thought there was no noise in space?)");
             being.getHurt(randomNumber); // subtracts hitpoints from user 
@@ -80,7 +84,7 @@ public class User extends Being{
     public void die(){
         this.hitpoints = 0; 
         this.alive = false;
-        System.out.println("You have died...");
+       // System.out.println("You have died...");
     }
     
     

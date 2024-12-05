@@ -39,9 +39,7 @@ class spaceShip{
             } else{
                 fuel -= distance;
                 this.location = bodyName;
-                System.out.println("You are now in orbit about " + bodyName.name + ".");
-                System.out.println(bodyName.name + " appears " + bodyName.description); // print what you see 
-
+                System.out.println("You are now in orbit about " + bodyName.name + "."); 
             }
         }
         
@@ -51,6 +49,7 @@ class spaceShip{
         if (this.location.orbitalRadius == bodyName.orbitalRadius){ // same location 
             System.out.println("Landing on " + bodyName.name + "..."); //bodyname doesn't work?
             System.out.println("Welcome to " + bodyName.name + "!");
+            System.out.println(bodyName.name + " appears " + bodyName.description); // print what you see 
             this.fuel -= 1;
             return true;
         } else{
