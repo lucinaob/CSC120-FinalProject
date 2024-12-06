@@ -23,7 +23,7 @@ public class GameLoop {
     System.out.println("You have no idea where you are."); 
 
     System.out.println("");
-    System.out.println("OPTIONS: \n + look [up/left/right/down] \n + move  \n + examine");
+    System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
     System.out.println("");
 
     // initilizes ship, user, aliens 
@@ -130,7 +130,7 @@ public class GameLoop {
                 System.out.println("");
             }
 
-            else if (userResponse.contains("move") || userResponse.contains("joystick")){
+            else if (userResponse.contains("move") && userResponse.contains("joystick")){
                 System.out.println("You move the joystick, and you feel the ship jerk to the side. ");
                 System.out.println("Suddenly, the dark expanse before you is interrupted by a familiar sight");
                 System.out.println("A large blue and green body, not unlike images of Earth that you have seen before, sits still before you.");
