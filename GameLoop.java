@@ -30,7 +30,7 @@ public class GameLoop {
     celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
     Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
 
-    spaceShip ship = new spaceShip(30, 100, Earth); 
+    spaceShip ship = new spaceShip(100, Earth); 
     User user = new User("name", Earth, 30); 
 
     // initilizing other planets + moons 
@@ -51,9 +51,9 @@ public class GameLoop {
 
 
     //initializing aliens
-    Alien alienOne = new Alien("Jordan the Alien", Jupiter, false, 50);
+    Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 50);
     Alien alienTwo = new Alien("Ab the Alien", Venus, false, 15);
-    Alien alienThree = new Alien("Ash the Alien", Neptune, false, 15);
+    Alien alienThree = new Alien("Ash the Alien", Mercury, false, 15);
     Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
 
     //Adding aliens to planets solid ones 
@@ -67,10 +67,9 @@ public class GameLoop {
             System.out.println("");
 
             userResponse = userInput.nextLine().toLowerCase(); 
-            // basic for now but I want to implement a running lsit of options as the game progresses somehow 
 
             if (userResponse.contains("look")){
-                if (userResponse.split(" ", 2)[1].equals("left")){
+                if (userResponse.contains("left")){
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
                     System.out.println("January 11th, 2036");
                     System.out.println("17:31 UTC");
@@ -86,27 +85,32 @@ public class GameLoop {
                 else if (userResponse.contains("backward") || userResponse.contains("behind")){
                     System.out.println("Behind you is a metal room. It's dark, you can't see much from this vantage point.");
                     System.out.println("");
-            }
+                }
 
                 else if (userResponse.contains("up")){
                     System.out.println("Above you is a metallic ceiling. Not much interesting is going on here.");
                     System.out.println("");
-            }
+                }
 
                 else if (userResponse.contains("down")){
                     System.out.println("Below you is what appears to be a control panel. A simple joystick sits before you. Next to the joystick is a red button with the words 'EJECT'. ");
                     System.out.println("");
-            }
+                }
+                
+                else{
+                    System.out.println("I don't understand, where do you want to look?");
+                }
+
             }
 
-            else if (userResponse.split(" ", 2)[0].equals("examine")){
+            else if (userResponse.contains("examine")){
 
                 if (userResponse.contains("panel")){
                     System.out.println("There isn't much else going on with the panel.");
                     System.out.println("");
                 }
 
-                if (userResponse.contains("book")){
+                else if (userResponse.contains("book")){
                     System.out.println("The books are written mostly in a script you cannot understand. Some have pictures, but most are just blocks of unfamilair text.");
                     System.out.println("One book appears to be written in a language you can understand");
                     System.out.println("The title reads: On the Habitability of the Jovian Moons");
@@ -119,15 +123,15 @@ public class GameLoop {
                     System.out.println("");
                 }
 
-                    }
+                else{
+                    System.out.println("I don't understand. What do you want to examine?");
+                }
+
+            }
 
             else if (userResponse.contains("eject") || userResponse.contains("button") || userResponse.contains("press")){
-                if (userResponse.contains("eject")){
-                    System.out.println("You hit the EJECT button once, twice, three times, but nothing happens. It doesn't seem to work.");
-                    System.out.println("");  // incredible
-                }
-                System.out.println("I don't know what you mean. What do you want to press?"); // this doesn't work I think i put it in the wrong place
-                System.out.println("");
+                System.out.println("You hit the EJECT button once, twice, three times, but nothing happens. It doesn't seem to work.");
+                System.out.println("");  // incredible
             }
 
             else if (userResponse.contains("move") && userResponse.contains("joystick")){
@@ -153,7 +157,7 @@ public class GameLoop {
             System.out.println("");
             System.out.println("What do you do? Where do you go?");
             System.out.println("");
-            System.out.println("OPTIONS: + go to [body name] \n + land on [body name] \n        + unboard \n        + board");
+            System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name] \n + Unboard \n + Board");
             System.out.println("");
             // grabs user input 
         do { 
@@ -161,6 +165,7 @@ public class GameLoop {
             userResponse = userInput.nextLine().toLowerCase(); 
             
             if (userResponse.contains("go")){
+                boolean goSuccess = true;
                 if (userResponse.contains("mars")){
                     ship.go(Mars);}
                 else if (userResponse.contains("mercury")){
@@ -174,6 +179,12 @@ public class GameLoop {
                     ship.go(Jupiter);
                     System.out.println("As you approach Jupiter, two moons - Ganymede and Europa - come into view.");
                 } 
+                else if (userResponse.contains("Ganymede")){
+                    ship.go(Ganymede);
+                }
+                else if (userResponse.contains("Europa")){
+                    ship.go(Europa);
+                }
                 else if (userResponse.contains("neptune")){
                     ship.go(Neptune);
                 } 
@@ -182,10 +193,14 @@ public class GameLoop {
                 }
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
-                } 
+                } else {
+                    goSuccess = false;
+                    System.out.println("I'm not sure where that is. Try going somewhere else.");
+                }
 
-            if (!ship.location.inhabitants.isEmpty()){
+            if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
                 System.out.println("While you orbit the body, something appears to be moving...");
+                System.out.println("What do you wish to do?");
             }
             }
 
@@ -257,7 +272,7 @@ public class GameLoop {
                if (midgameSequence){
 
                 System.out.println("");
-                System.out.println("OPTIONS: \n + unboard \n + board \n + talk \n + fight \n ");
+                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n ");
                 System.out.println("");
 
                 do { 
@@ -276,7 +291,13 @@ public class GameLoop {
                             System.out.println("You are already on board.");
                         }  else{
                             ship.board(user);
-                            landSuccess= false; // reassigns to get out of while loop
+                            System.out.println("Would you like to take off again?");
+                            String userResponseTakeOff = userInput.nextLine().toLowerCase();
+                            if(userResponseTakeOff.contains("y")){
+                                landSuccess  = false;
+                            } 
+                            System.out.println("What do you wish to do?");
+                            System.out.println("");
                         }
                     }
 
@@ -376,13 +397,13 @@ public class GameLoop {
 
                         else if (localLife.hasKey){
                             System.out.println("What do you want to say? ");
-                            userResponse = userInput.nextLine().toLowerCase(); 
-                            user.talk(localLife, userResponse); 
+                            String userTalk = userInput.nextLine().toLowerCase(); 
+                            user.talk(localLife, userTalk); 
                         }
 
                     }
 
-                    if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
+                    if ((userResponse.contains("status"))){
                         if (user.onBoard){
                             ship.getStatus("onBody");
                         } else{
@@ -390,7 +411,8 @@ public class GameLoop {
                         }
                     }
 
-                    else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open")){
+                    //This also prints if talk is happening, fix this?
+                    else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open")){
                     System.out.println("I don't know what you mean. Try 'talk', 'fight', 'board/unboard'");
                     }
 
@@ -398,14 +420,14 @@ public class GameLoop {
             
             }
 
-            if ((userResponse.contains("ration")) || (userResponse.contains("status"))){
+            if ((userResponse.contains("status"))){
                 ship.getStatus("midgameSequence"); // get status at any time 
             }
 
-            else if(!userResponse.contains("ration") && !userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")){
-                    System.out.println("I don't know what you mean. Try 'land' or 'go.'");  
+            if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")){
+                    System.out.println("I don't know what you mean. Try 'land' or 'go.'");  //This prints when user dies in fight — how to fix?
+                    System.out.println("");
                     }
-            System.out.println("");
 
           } while (midgameSequence);
         
