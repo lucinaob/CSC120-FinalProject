@@ -51,9 +51,9 @@ public class GameLoop {
 
 
     //initializing aliens
-    Alien alienOne = new Alien("Jordan the Alien", Jupiter, false, 50);
+    Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 50);
     Alien alienTwo = new Alien("Ab the Alien", Venus, false, 15);
-    Alien alienThree = new Alien("Ash the Alien", Neptune, false, 15);
+    Alien alienThree = new Alien("Ash the Alien", Mercury, false, 15);
     Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
 
     //Adding aliens to planets solid ones 
@@ -165,6 +165,7 @@ public class GameLoop {
             userResponse = userInput.nextLine().toLowerCase(); 
             
             if (userResponse.contains("go")){
+                boolean goSuccess = true;
                 if (userResponse.contains("mars")){
                     ship.go(Mars);}
                 else if (userResponse.contains("mercury")){
@@ -178,6 +179,12 @@ public class GameLoop {
                     ship.go(Jupiter);
                     System.out.println("As you approach Jupiter, two moons - Ganymede and Europa - come into view.");
                 } 
+                else if (userResponse.contains("Ganymede")){
+                    ship.go(Ganymede);
+                }
+                else if (userResponse.contains("Europa")){
+                    ship.go(Europa);
+                }
                 else if (userResponse.contains("neptune")){
                     ship.go(Neptune);
                 } 
@@ -187,11 +194,13 @@ public class GameLoop {
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
                 } else {
+                    goSuccess = false;
                     System.out.println("I'm not sure where that is. Try going somewhere else.");
                 }
 
-            if (!ship.location.inhabitants.isEmpty()){
+            if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
                 System.out.println("While you orbit the body, something appears to be moving...");
+                System.out.println("What do you wish to do?");
             }
             }
 
@@ -287,7 +296,8 @@ public class GameLoop {
                             if(userResponseTakeOff.contains("y")){
                                 landSuccess  = false;
                             } 
-                            System.out.println("What do you wish to do?");// reassigns to get out of while loop
+                            System.out.println("What do you wish to do?");
+                            System.out.println("");
                         }
                     }
 
@@ -387,8 +397,8 @@ public class GameLoop {
 
                         else if (localLife.hasKey){
                             System.out.println("What do you want to say? ");
-                            userResponse = userInput.nextLine().toLowerCase(); 
-                            user.talk(localLife, userResponse); 
+                            String userTalk = userInput.nextLine().toLowerCase(); 
+                            user.talk(localLife, userTalk); 
                         }
 
                     }
@@ -401,6 +411,7 @@ public class GameLoop {
                         }
                     }
 
+                    //This also prints if talk is happening, fix this?
                     else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open")){
                     System.out.println("I don't know what you mean. Try 'talk', 'fight', 'board/unboard'");
                     }
@@ -414,7 +425,7 @@ public class GameLoop {
             }
 
             if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")){
-                    System.out.println("I don't know what you mean. Try 'land' or 'go.'");  
+                    System.out.println("I don't know what you mean. Try 'land' or 'go.'");  //This prints when user dies in fight — how to fix?
                     System.out.println("");
                     }
 
