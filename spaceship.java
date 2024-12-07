@@ -38,6 +38,9 @@ class spaceShip{
                 fuel -= distance;
                 this.location = bodyName;
                 System.out.println("You are now in orbit about " + bodyName.name + "."); 
+                if(bodyName.description != null){
+                    System.out.println(bodyName.name + " is " + bodyName.description);
+                }
             }
         }
         

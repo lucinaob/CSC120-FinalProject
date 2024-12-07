@@ -27,7 +27,7 @@ public class GameLoop {
     System.out.println("");
 
     // initilizes ship, user, aliens 
-    celestialBody Earth = new celestialBody("Earth", 1., true, "Blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
+    celestialBody Earth = new celestialBody("Earth", 1., true, "blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
     Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
 
     spaceShip ship = new spaceShip(100, Earth); 
@@ -46,9 +46,8 @@ public class GameLoop {
     Jupiter.addMoon(Ganymede); 
 
     celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas, false);
-    celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "with a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas, false);
-    celestialBody Neptune = new celestialBody("Neptune", 30., false, "distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas, false);
-
+    celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas, false);
+    celestialBody Neptune = new celestialBody("Neptune", 30., false, "a distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas, false);
 
     //initializing aliens
     Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 50);
@@ -199,7 +198,7 @@ public class GameLoop {
                 }
 
             if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
-                System.out.println("While you orbit the body, something appears to be moving...");
+                System.out.println("While you orbit the body, something on the surface appears to be moving...");
                 System.out.println("What do you wish to do?");
             }
             }
