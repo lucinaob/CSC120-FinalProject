@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class User extends Being{
 
+    //Unique attributes of a being
     boolean knowsCode; // boolean to represent if the user has found out the truth! 
     boolean onBoard; //should this be in ship or person class? should be wherever board() is
     public static final String ANSI_RED = "\u001B[31m"; 
@@ -36,7 +37,7 @@ public class User extends Being{
         System.out.print(ANSI_RESET);
         }
     
-    // overload! 
+    // move to alien?
     public void talk(Alien name, String dialog){
 
             System.out.println(ANSI_RED + "...");
