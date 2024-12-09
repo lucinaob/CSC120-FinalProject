@@ -53,16 +53,18 @@ public class GameLoop {
     celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas, false);
     celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas, false);
     celestialBody Neptune = new celestialBody("Neptune", 30., false, "a distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas, false);
+    celestialBody Pluto = new celestialBody("Pluto", 39.5, false, "small and desolate. A small red heart appears on its side." ,  surfaceProperties.rock, false);
+
 
     //initializing aliens
-    Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 50);
-    Alien alienTwo = new Alien("Ab the Alien", Venus, false, 15);
+    Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 15);
+    Alien alienTwo = new Alien("Ab the Alien", Pluto, false, 15);
     Alien alienThree = new Alien("Ash the Alien", Mercury, false, 15);
     Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
 
     //Adding aliens to planets solid ones 
     Ganymede.getInfested(alienOne);
-    Venus.getInfested(alienTwo);
+    Pluto.getInfested(alienTwo);
     moon.getInfested(alienThree);
     Mars.getInfested(alienFour);
 
@@ -186,12 +188,7 @@ public class GameLoop {
                     System.out.println("");
 
                 } 
-                // else if (userResponse.contains("Ganymede")){
-                //     ship.go(Ganymede);
-                // }
-                // else if (userResponse.contains("Europa")){
-                //     ship.go(Europa);
-                // }
+
                 else if (userResponse.contains("neptune")){
                     ship.go(Neptune);
                 } 
@@ -200,6 +197,10 @@ public class GameLoop {
                 }
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
+
+                } 
+                else if(userResponse.contains("pluto")){
+                    ship.go(Pluto);
 
                 } 
                 else if (!ship.location.name.equals("Jupiter")){
