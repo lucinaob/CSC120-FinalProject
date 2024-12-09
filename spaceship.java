@@ -69,7 +69,7 @@ class spaceShip{
                 fuel -= distance; //descrease fuel level by distance
                 this.location = bodyName; //set ship location to the body
                 System.out.println("You are now in orbit about " + bodyName.name + "."); //Print that you have arrived at the body
-                System.out.println("");
+                bodyName.display(); 
 
             }
         }

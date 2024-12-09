@@ -17,14 +17,19 @@ public class GameLoop {
     String userResponse = "";
 
     System.out.println(User.textReset);
+    try{
     System.out.println("...");
+    Thread.sleep(1);
     System.out.println("The air is extremly still.");
+    Thread.sleep(1);
     System.out.println("Before you is a dark expanse. Metallic walls surround you.");
+    Thread.sleep(1);
     System.out.println("You have no idea where you are."); 
 
     System.out.println("");
     System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
     System.out.println("");
+    } catch (InterruptedException e) {}
 
     // initilizes ship, user, aliens 
     celestialBody Earth = new celestialBody("Earth", 1., true, "blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
@@ -39,7 +44,7 @@ public class GameLoop {
     celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock, false);
     
     celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas, true);
-    Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with deep red chasams. Something silvery juts out from the ground near your ship.", surfaceProperties.ice, Jupiter); 
+    Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with deep red chasams. Something silvery juts out from the ground near your ship. \n You can almost make out the shape of a door?", surfaceProperties.ice, Jupiter); 
     Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
 
     Jupiter.addMoon(Europa);
@@ -64,7 +69,6 @@ public class GameLoop {
     // START DIALOGE
 
     System.out.println("What do you wish do?");
-    System.out.println("");
 
     do{
             System.out.println("-----------------------------------------------------------");
@@ -74,57 +78,49 @@ public class GameLoop {
             if (userResponse.contains("look")){
                 if (userResponse.contains("left")){
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
+                    System.out.println("SPACECRAFT E10.312.01"); // random numbers idk 
                     System.out.println("January 11th, 2036");
                     System.out.println("17:31 UTC");
                     ship.getStatus("introSequence"); 
-                    System.out.println("");
                 }
 
                 else if (userResponse.contains("right")){
                         System.out.println("To your right is a shelf, filled with books. On the top shelf is a picture frame containing a picture of a small child holding a cat.");
-                        System.out.println("");
                 }
 
                 else if (userResponse.contains("backward") || userResponse.contains("behind")){
                     System.out.println("Behind you is a metal room. It's dark, you can't see much from this vantage point.");
-                    System.out.println("");
                 }
 
                 else if (userResponse.contains("up")){
                     System.out.println("Above you is a metallic ceiling. Not much interesting is going on here.");
-                    System.out.println("");
                 }
 
                 else if (userResponse.contains("down")){
                     System.out.println("Below you is what appears to be a control panel. A simple joystick sits before you. Next to the joystick is a red button with the words 'EJECT'. ");
                     System.out.println("It looks like you could move the joystick.");
-                    System.out.println("");
                 }
                 
                 else{
                     System.out.println("I don't understand, where do you want to look?");
                 }
-
             }
 
             else if (userResponse.contains("examine")){
 
                 if (userResponse.contains("panel")){
                     System.out.println("There isn't much else going on with the panel.");
-                    System.out.println("");
                 }
 
                 else if (userResponse.contains("book")){
                     System.out.println("The books are written mostly in a script you cannot understand. Some have pictures, but most are just blocks of unfamilair text.");
                     System.out.println("One book appears to be written in a language you can understand");
-                    System.out.println("The title reads: On the Habitability of the Jovian Moons");
-                    System.out.println("");
+                    System.out.println("The title reads: On the Habitability of Jupiter's Moons");
                 }
 
                 else if (userResponse.contains("photo") || userResponse.contains("picture")){
                     System.out.println("The photo is old, but in pristine condition.");
                     System.out.println("The child looks a little familiar.");
-                    System.out.println("");
                 }
 
                 else{
@@ -135,16 +131,22 @@ public class GameLoop {
 
             else if (userResponse.contains("eject") || userResponse.contains("button") || userResponse.contains("press")){
                 System.out.println("You hit the EJECT button once, twice, three times, but nothing happens. It doesn't seem to work.");
-                System.out.println("");  // incredible
             }
 
             else if (userResponse.contains("move") && userResponse.contains("joystick")){
+                Earth.display(); 
+                try { 
                 System.out.println("You move the joystick, and you feel the ship jerk to the side. ");
+                Thread.sleep(1);  
                 System.out.println("Suddenly, the dark expanse before you is interrupted by a familiar sight");
+                Thread.sleep(1);  
                 System.out.println("A large blue and green body, not unlike images of Earth that you have seen before, sits still before you.");
+                Thread.sleep(1);  
                 System.out.println("Except unlike those images, there appears to be a massive hole through the middle.");
+                Thread.sleep(1);  
                 System.out.println("");
                 introSequence = false; 
+                } catch (InterruptedException e) {}
 
         } 
 
@@ -161,7 +163,6 @@ public class GameLoop {
             System.out.println("What do you do? Where do you go?");
             System.out.println("");
             System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
-            System.out.println("");
             // grabs user input 
         do { 
             System.out.println("-----------------------------------------------------------");
@@ -185,12 +186,12 @@ public class GameLoop {
                     System.out.println("");
 
                 } 
-                else if (userResponse.contains("Ganymede")){
-                    ship.go(Ganymede);
-                }
-                else if (userResponse.contains("Europa")){
-                    ship.go(Europa);
-                }
+                // else if (userResponse.contains("Ganymede")){
+                //     ship.go(Ganymede);
+                // }
+                // else if (userResponse.contains("Europa")){
+                //     ship.go(Europa);
+                // }
                 else if (userResponse.contains("neptune")){
                     ship.go(Neptune);
                 } 
@@ -290,7 +291,7 @@ public class GameLoop {
                if (midgameSequence){
 
                 System.out.println("");
-                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off \n");
+                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight");
 
                 do { 
 
@@ -340,32 +341,43 @@ public class GameLoop {
                             System.out.println("You can't take off from outside the ship!");
                         } else{
                             ship.takeOff(ship.location);
+                            landSuccess  = false;
                         }
                     }
                             
 
                     if (ship.location.name.equals("Europa") && (userResponse.toLowerCase().trim().contains("door") || userResponse.toLowerCase().trim().contains("silver"))){
                         System.out.println("You walk towards the silver thing in the distance. As you get closer, you see a door, protruding from the ice.");
-    
+                        System.out.println("-----------------------------------------------------------");
+                        userResponse = userInput.nextLine().toLowerCase(); 
+
                         if (user.knowsCode){
                             System.out.println("Wait! you have a key!");
-                            System.out.println("-----------------------------------------------------------");
-                            userResponse = userInput.nextLine().toLowerCase(); 
-
+                            
                         if (userResponse.toLowerCase().trim().contains("open") && user.knowsCode){
+                            try{
                             System.out.println("You insert the key into the hole, and turn the knob.");
                             System.out.println("The door opens to reveal a staircase, leading down.");
+                            Thread.sleep(1); 
                             System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
+                            Thread.sleep(1); 
                             System.out.println("You enter the elevator, and press the only button there.");
+                            Thread.sleep(1); 
                             System.out.println("'going down!'");
+                            Thread.sleep(1); 
+                            System.out.println("...");
+                            Thread.sleep(1); 
+                            System.out.println("...");
+                            Thread.sleep(1); 
                             System.out.println("...");
                             System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
                             midgameSequence = false;   
+                             } catch (InterruptedException e) {}
 
                         } } 
                             //End of game stuff
                         
-                        else if (!user.knowsCode){
+                        else if (userResponse.toLowerCase().trim().contains("open") && !user.knowsCode){
                             System.out.println("Suprise, suprise. the door is locked.");
                             System.out.println("Maybe the key is somewhere...");
                             System.out.println("The solar system isn't that big, right?");
@@ -376,7 +388,7 @@ public class GameLoop {
 
                     if (userResponse.contains("fight") || userResponse.contains("attack")){
                         if(user.onBoard || localLife.name.equals("bacteria")){
-                            System.out.println("Who are you going to fight? The wall?");
+                            System.out.println("What are you going to fight? The ground?");
                         } 
                         
                         else if (localLife.alive) {
@@ -438,8 +450,8 @@ public class GameLoop {
                     }
 
                     //This also prints if talk is happening, fix this?
-                    else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open") && !userResponse.contains("take off")){
-                    System.out.println("I don't know what you mean. Try 'talk', 'fight', 'take off, 'board/unboard'");
+                    else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open") && !userResponse.contains("take") && !userResponse.contains("door") && !userResponse.contains("silver")){
+                    System.out.println("I don't know what you mean. Try 'talk', 'fight', 'take off, 'board/unboard', 'take off'");
                     }
 
                 } while (landSuccess && midgameSequence); }
@@ -450,8 +462,8 @@ public class GameLoop {
                 ship.getStatus("midgameSequence"); // get status at any time 
             }
 
-            if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")){
-                    System.out.println("I don't know what you mean. Try 'land' or 'go.'");  //This prints when user dies in fight — how to fix?
+            if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")&& !userResponse.contains("open") ){
+                    System.out.println("I don't know what you mean. ");  //This prints when user dies in fight — how to fix?
                     System.out.println("");
                     }
 
@@ -459,17 +471,28 @@ public class GameLoop {
         
         
         if (user.alive){
-            System.out.println("...");
-            System.out.println("SUPRISE!");
-            System.out.println("you stand in shock as your friends and family cheer for you. There is a large cake on the table.");
-            System.out.println("You look down, and see you are wearing solar system print pajamas");
-            System.out.println("Well. That was a weird dream, you think.");
+            try{
+                Thread.sleep(1000); 
+                System.out.println("...");
+                Thread.sleep(1000); 
+                System.out.println("SUPRISE!");
+                Thread.sleep(1000); 
+                System.out.println("you stand in shock as your friends and family cheer for you. There is a large cake on the table.");
+                Thread.sleep(2000); 
+                System.out.println("You look down, and see you are wearing solar system print pajamas. A cat rubs against your leg.");
+                Thread.sleep(2000); 
+                System.out.println("Well. That was a weird dream, you think.");
+                } catch (InterruptedException e) {}
         }
 
         else {
+            try{
             System.out.println("You wake up in a cold sweat... in your childhood bedroom? ");
+            Thread.sleep(1000);
             System.out.println("The clock reads 3:14 AM.");
+            Thread.sleep(1000);
             System.out.println("You should go back to sleep.");
+            } catch (InterruptedException e) {}
         }
 
         }

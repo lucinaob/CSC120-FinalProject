@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class celestialBody{
 
@@ -47,6 +50,29 @@ class celestialBody{
      */
     public void addMoon(Moon moon){
         this.moons.add(moon); //Adds moon to body's list of moons
+    }
+
+    public void display(){
+
+        try {
+        File myFile = new File("planet_images/" + this.name + ".txt");
+        Scanner fileReader = new Scanner(myFile); // <- Same kind of object we used to read from the command line! But instead of System.in, we're reading from the file
+
+        // Loop until we run out of lines
+        while (fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            System.out.println(data);
+        }
+
+        // Tidy up
+        fileReader.close();
+        
+        } catch (FileNotFoundException e) { // Sometimes things go wrong; we'll handle that here
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+        }
+
+
     }
 
 }
