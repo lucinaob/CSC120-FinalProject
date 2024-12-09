@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 class spaceShip{
     
     //Attributes of a spaceship
@@ -126,12 +130,33 @@ class spaceShip{
         System.out.println("-------------------------");
        // Print methods avaliable at different stages of the game
         if (place.equals("introSequence")){
-            System.out.println("OPTIONS: \n + Look [up/left/right/down] \n + Examine");
+            System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine [object] \n + move [object]");
         } else if (place.equals("orbitSequence")){
             System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
         } else if (place.equals("onBody")){
-            System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off");
+            System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off \n" );
         } 
 
+    }
+
+    public void displaySS(){
+
+        try {
+        File myFile = new File("planet_images/" + "ss.txt");
+        Scanner fileReader = new Scanner(myFile); // <- Same kind of object we used to read from the command line! But instead of System.in, we're reading from the file
+
+        // Loop until we run out of lines
+        while (fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            System.out.println(data);
+        }
+
+        // Tidy up
+        fileReader.close();
+        
+        } catch (FileNotFoundException e) { // Sometimes things go wrong; we'll handle that here
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+        }
     }
 }

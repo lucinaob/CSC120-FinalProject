@@ -72,6 +72,8 @@ class celestialBody{
         e.printStackTrace();
         }
 
+    
+
 
     }
 

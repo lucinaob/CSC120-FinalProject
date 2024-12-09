@@ -19,15 +19,15 @@ public class GameLoop {
         System.out.println(User.textReset);
         try{
             System.out.println("...");
-            Thread.sleep(1);
+            Thread.sleep(500);
             System.out.println("The air is extremly still.");
-            Thread.sleep(1);
+            Thread.sleep(1000);
             System.out.println("Before you is a dark expanse. Metallic walls surround you.");
-            Thread.sleep(1);
+            Thread.sleep(2000);
             System.out.println("You have no idea where you are."); 
 
             System.out.println("");
-            System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
+            System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine [object] \n + move [object]");
             System.out.println("");
         } catch (InterruptedException e) {}
 
@@ -57,10 +57,10 @@ public class GameLoop {
 
 
         //initializing aliens
-        Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 15);
-        Alien alienTwo = new Alien("Ab the Alien", Pluto, false, 15);
-        Alien alienThree = new Alien("Ash the Alien", Mercury, false, 15);
-        Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
+        Alien alienOne = new Alien("Gorp", Ganymede, false, 15);
+        Alien alienTwo = new Alien("Plak", Pluto, false, 15);
+        Alien alienThree = new Alien("Merk", Mercury, false, 15);
+        Alien alienFour = new Alien("Queen", Mars, true, 15);
 
         //Adding aliens to planets solid ones 
         Ganymede.getInfested(alienOne);
@@ -81,6 +81,8 @@ public class GameLoop {
                 if (userResponse.contains("left")){
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
                     System.out.println("-----------------------------------------------------------");
+                    ship.displaySS(); // displays solar system image 
+                    System.out.println("");
                     System.out.println("| SPACECRAFT E10.312.01 |"); // random numbers idk 
                     System.out.println("| LOC: Solar System     |");
                     System.out.println("| January 11th, 2036    |");
@@ -306,6 +308,9 @@ public class GameLoop {
 
                 System.out.println("");
                 System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off");
+                if (ship.location.name.equals("Europa")){
+                    System.out.println(" + examine [object] \n + open [object]"); // different options on europa 
+                }
 
                 do { 
 
@@ -340,8 +345,8 @@ public class GameLoop {
                             ship.unboard(user);
                             System.out.println("You are now on the surface of " + ship.location.name);
                             if (!ship.location.inhabitants.isEmpty()){
-                                System.out.println("You land, and immediatly sense something is off. A shadow looms over your ship...");
-                                System.out.println("You turn to see what looks like... a giant earthworm?");
+                                System.out.println("You land, and see the being surface near you.");
+                                System.out.println("You turn to see what looks like... the head of a giant earthworm?");
                                 System.out.println("Do you want to fight it, talk to it, or get back onboard?");
                                 System.out.println("");
                             } else if (!ship.location.equals(Europa)){
