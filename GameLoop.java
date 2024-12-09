@@ -192,7 +192,8 @@ public class GameLoop {
                 }
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
-                } else {
+
+                } else if (!userResponse.contains("ganymede") || !userResponse.contains("ganymede")){
                     goSuccess = false;
                     System.out.println("I'm not sure where that is. Try going somewhere else.");
                 }
@@ -290,7 +291,7 @@ public class GameLoop {
                             System.out.println("You are already on board.");
                         }  else{
                             ship.board(user);
-                            System.out.println("Would you like to take off again?");
+                            System.out.println("Would you like to take off again (y/n)?");
                             String userResponseTakeOff = userInput.nextLine().toLowerCase();
                             if(userResponseTakeOff.toLowerCase().contains("y")){
                                 ship.takeOff(ship.location);
