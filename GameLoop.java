@@ -80,9 +80,11 @@ public class GameLoop {
             if (userResponse.contains("look")){
                 if (userResponse.contains("left")){
                     System.out.println("To your left is a panel with lots of buttons on it, and a small screen. The screen reads: ");
-                    System.out.println("SPACECRAFT E10.312.01"); // random numbers idk 
-                    System.out.println("January 11th, 2036");
-                    System.out.println("17:31 UTC");
+                    System.out.println("-----------------------------------------------------------");
+                    System.out.println("| SPACECRAFT E10.312.01 |"); // random numbers idk 
+                    System.out.println("| LOC: Solar System     |");
+                    System.out.println("| January 11th, 2036    |");
+                    System.out.println("| 17:31 UTC             |");
                     ship.getStatus("introSequence"); 
                 }
 

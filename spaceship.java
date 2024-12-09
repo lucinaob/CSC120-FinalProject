@@ -119,7 +119,8 @@ class spaceShip{
      */
     public void getStatus(String place){
         //Print fuel status and location
-        System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + LOCATION: " + this.location.name); 
+        System.out.println("| CURRENT STATUS: \n |  + Fuel = " + this.fuel + "         |\n |  + LOCATION: " + this.location.name + "      |"); 
+        System.out.println("-------------------------");
        // Print methods avaliable at different stages of the game
         if (place.equals("introSequence")){
             System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
