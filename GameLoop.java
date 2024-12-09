@@ -213,7 +213,6 @@ public class GameLoop {
             if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
                 System.out.println("");
                 System.out.println("While you orbit the body, something on the surface appears to be moving...");
-                System.out.println("What do you wish to do?");
                 System.out.println("");
                 
             }
@@ -289,10 +288,10 @@ public class GameLoop {
                         System.out.println("");
                     }}
                 
-               if (midgameSequence){
+               if (midgameSequence && landSuccess){
 
                 System.out.println("");
-                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight");
+                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off");
 
                 do { 
 
@@ -342,6 +341,7 @@ public class GameLoop {
                             System.out.println("You can't take off from outside the ship!");
                         } else{
                             ship.takeOff(ship.location);
+                            landSuccess=false; 
                         }
                     }
                             
@@ -451,16 +451,13 @@ public class GameLoop {
             }
 
             if ((userResponse.contains("status"))){
-                ship.getStatus("midgameSequence"); // get status at any time 
+                ship.getStatus("orbitSequence"); // get status at any time 
             }
 
-            if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board")&& !userResponse.contains("open") ){
+            if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board") && !userResponse.contains("open") && !userResponse.contains("take off")){
                     System.out.println("I don't know what you mean. ");  //This prints when user dies in fight — how to fix?
                     System.out.println("");
                     }
-
-            System.out.println("What do you wish to do?");
-            System.out.println("");
 
           } while (midgameSequence);
         
