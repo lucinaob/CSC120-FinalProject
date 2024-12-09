@@ -270,7 +270,8 @@ public class GameLoop {
                 else if (ship.location.surface == surfaceProperties.ice){
                     System.out.println("As you descend towards " + ship.location.name + ", you don't notice much difference from the stark, interplanetary air. There is little atmosphere, and the surface is glistening in reflected light.");
                     ship.land(ship.location);
-                    landSuccess=true; }
+                    landSuccess=true; 
+                }
 
                 else if (ship.location.surface == surfaceProperties.rock){
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
@@ -315,8 +316,6 @@ public class GameLoop {
                                 ship.takeOff(ship.location);
                                 landSuccess  = false;
                             } 
-                            System.out.println("What do you wish to do?");
-                            System.out.println("");
                         }
                     }
 
@@ -332,7 +331,9 @@ public class GameLoop {
                                 System.out.println("You turn to see what looks like... a giant earthworm?");
                                 System.out.println("Do you want to fight it, talk to it, or get back onboard?");
                                 System.out.println("");
-                                }
+                            } else if (!ship.location.equals(Europa)){
+                                System.out.println("No matter where you look, there's no signs of life.");
+                            }
                             }
                     }
 
@@ -341,7 +342,6 @@ public class GameLoop {
                             System.out.println("You can't take off from outside the ship!");
                         } else{
                             ship.takeOff(ship.location);
-                            landSuccess  = false;
                         }
                     }
                             
@@ -353,31 +353,23 @@ public class GameLoop {
 
                         if (user.knowsCode){
                             System.out.println("Wait! you have a key!");
-                            
+                            System.out.println("-----------------------------------------------------------");
+                            userResponse = userInput.nextLine().toLowerCase(); 
+
                         if (userResponse.toLowerCase().trim().contains("open") && user.knowsCode){
-                            try{
                             System.out.println("You insert the key into the hole, and turn the knob.");
                             System.out.println("The door opens to reveal a staircase, leading down.");
-                            Thread.sleep(1); 
                             System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
-                            Thread.sleep(1); 
                             System.out.println("You enter the elevator, and press the only button there.");
-                            Thread.sleep(1); 
                             System.out.println("'going down!'");
-                            Thread.sleep(1); 
-                            System.out.println("...");
-                            Thread.sleep(1); 
-                            System.out.println("...");
-                            Thread.sleep(1); 
                             System.out.println("...");
                             System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
                             midgameSequence = false;   
-                             } catch (InterruptedException e) {}
 
                         } } 
                             //End of game stuff
                         
-                        else if (userResponse.toLowerCase().trim().contains("open") && !user.knowsCode){
+                        else if (!user.knowsCode){
                             System.out.println("Suprise, suprise. the door is locked.");
                             System.out.println("Maybe the key is somewhere...");
                             System.out.println("The solar system isn't that big, right?");
@@ -466,6 +458,9 @@ public class GameLoop {
                     System.out.println("I don't know what you mean. ");  //This prints when user dies in fight — how to fix?
                     System.out.println("");
                     }
+
+            System.out.println("What do you wish to do?");
+            System.out.println("");
 
           } while (midgameSequence);
         
