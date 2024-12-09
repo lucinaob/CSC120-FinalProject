@@ -39,7 +39,7 @@ public class GameLoop {
     celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock, false);
     
     celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas, true);
-    Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with stark red chasams. Something silvery glistens on the horizon", surfaceProperties.ice, Jupiter); 
+    Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with deep red chasams. Something silvery juts out from the ground near your ship.", surfaceProperties.ice, Jupiter); 
     Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
 
     Jupiter.addMoon(Europa);
@@ -61,11 +61,15 @@ public class GameLoop {
     moon.getInfested(alienThree);
     Mars.getInfested(alienFour);
 
-    do{
-            System.out.println("1. What do you wish to do?");
-            System.out.println("");
+    // START DIALOGE
 
+    System.out.println("What do you wish do?");
+    System.out.println("");
+
+    do{
+            System.out.println("-----------------------------------------------------------");
             userResponse = userInput.nextLine().toLowerCase(); 
+
 
             if (userResponse.contains("look")){
                 if (userResponse.contains("left")){
@@ -93,6 +97,7 @@ public class GameLoop {
 
                 else if (userResponse.contains("down")){
                     System.out.println("Below you is what appears to be a control panel. A simple joystick sits before you. Next to the joystick is a red button with the words 'EJECT'. ");
+                    System.out.println("It looks like you could move the joystick.");
                     System.out.println("");
                 }
                 
@@ -138,7 +143,6 @@ public class GameLoop {
                 System.out.println("Suddenly, the dark expanse before you is interrupted by a familiar sight");
                 System.out.println("A large blue and green body, not unlike images of Earth that you have seen before, sits still before you.");
                 System.out.println("Except unlike those images, there appears to be a massive hole through the middle.");
-                System.out.println("...");
                 System.out.println("");
                 introSequence = false; 
 
@@ -156,11 +160,11 @@ public class GameLoop {
             System.out.println("");
             System.out.println("What do you do? Where do you go?");
             System.out.println("");
-            System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name] \n + Unboard \n + Board");
+            System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
             System.out.println("");
             // grabs user input 
         do { 
-            
+            System.out.println("-----------------------------------------------------------");
             userResponse = userInput.nextLine().toLowerCase(); 
             
             if (userResponse.contains("go")){
@@ -172,11 +176,14 @@ public class GameLoop {
                 else if (userResponse.contains("venus")){
                     ship.go(Venus);}
                 else if (userResponse.contains("earth")){
+                    System.out.println("As you approach Earth, the Moon comes into view");
                     ship.go(Earth);
                 }
                 else if (userResponse.contains("jupiter")){
                     ship.go(Jupiter);
                     System.out.println("As you approach Jupiter, two moons - Ganymede and Europa - come into view.");
+                    System.out.println("");
+
                 } 
                 else if (userResponse.contains("Ganymede")){
                     ship.go(Ganymede);
@@ -193,14 +200,21 @@ public class GameLoop {
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
 
-                } else if (!userResponse.contains("ganymede") || !userResponse.contains("europa")){
+                } 
+                else if (!ship.location.name.equals("Jupiter")){
+                    if(userResponse.contains("ganymede") || userResponse.contains("europa")){
                     goSuccess = false;
-                    System.out.println("I'm not sure where that is. Try going somewhere else.");
-                }
+                    System.out.println("You must be in orbit around the host planet before landing on a moon.");
+                    System.out.println("");
+                    }
+                } 
 
             if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
+                System.out.println("");
                 System.out.println("While you orbit the body, something on the surface appears to be moving...");
                 System.out.println("What do you wish to do?");
+                System.out.println("");
+                
             }
             }
 
@@ -238,17 +252,18 @@ public class GameLoop {
                 
                 landSuccess = false; 
                 System.out.println("You engage your landing gears and begain your descent towards " + ship.location.name + ".");
+                System.out.println("");
 
-                if (ship.location.surface == surfaceProperties.gas){ // you cannot land on a gas giant u fool
+                if (ship.location.surface == surfaceProperties.gas){ // you cannot land on a gas giant 
                     System.out.println("As you descend towards " + ship.location.name + ", the air grows dense and hazy, and you feel a stong graviational pull.");
                     System.out.println("The walls around you begin to cave in as the outside haze closes in.");
                     System.out.println("You feel crushed under the extreme gravity as the ship's power begins to fade...");
+                    System.out.println("");
                   //  endgameSequence = true;   // rip 
                     user.die(); 
                     midgameSequence = false; 
                     landSuccess = false; 
 
-                    // want to have some end sequence class we can call from gameloop class I think to put when the user dies 
                 }
 
                 else if (ship.location.surface == surfaceProperties.ice){
@@ -259,22 +274,24 @@ public class GameLoop {
 
                 else if (ship.location.surface == surfaceProperties.rock){
                     System.out.println("As you descend towards " + ship.location.name + ", a thin, teneous atmosphere becomes visible. The surface appears rocky and cratered. ");
+                    System.out.println("");
                     if (!ship.location.destroyed){
                         ship.land(ship.location);
                         if (!ship.location.inhabitants.isEmpty()){
-                            System.out.println("Now that you can see them better, those worm-like things are moving! They must be some kind of alien lifeform.");
-                            System.out.println("One isn't too far from where you just landed.");
+                            System.out.println("As you descend, you see the thing on the surface is a massive, earthworm-like...thing.");
+                            System.out.println("It appears to have burrowed through the surface of the body... and as you land, its head surfaces right by your ship.");
+                            System.out.println("");
                         }
                         landSuccess=true;
                     } else{
                         System.out.println("The surface seems too damaged to land...");
+                        System.out.println("");
                     }}
                 
                if (midgameSequence){
 
                 System.out.println("");
                 System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off \n");
-                System.out.println("");
 
                 do { 
 
@@ -283,8 +300,8 @@ public class GameLoop {
                         localLife = ship.location.inhabitants.get(0);
                     }
         
-                    System.out.println("2. What do you wish do?");
-                    System.out.println("");
+                    // System.out.println("What do you wish do?");
+                    System.out.println("-----------------------------------------------------------");
                     userResponse = userInput.nextLine().toLowerCase();
 
                     if (userResponse.contains("board") && !userResponse.contains("un")){
@@ -333,9 +350,9 @@ public class GameLoop {
                         System.out.println("You walk towards the silver thing in the distance. As you get closer, you see a door, protruding from the ice.");
     
                         if (user.knowsCode){
-                            System.out.println("Wait! You have a key!");
-
-                        userResponse = userInput.nextLine().toLowerCase(); 
+                            System.out.println("Wait! you have a key!");
+                            System.out.println("-----------------------------------------------------------");
+                            userResponse = userInput.nextLine().toLowerCase(); 
 
                         if (userResponse.toLowerCase().trim().contains("open") || userResponse.toLowerCase().contains("key")){
                             if (user.knowsCode){
