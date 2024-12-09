@@ -5,74 +5,74 @@ public class GameLoop {
 
     public static void main(String[] args) {
 
-    // This is a "flag" to let us know when the intro loop should end
-    boolean introSequence = true;
-    boolean midgameSequence = true;
-    boolean landSuccess = false;
+        // This is a "flag" to let us know when the intro loop should end
+        boolean introSequence = true;
+        boolean midgameSequence = true;
+        boolean landSuccess = false;
 
-    // We'll use this to get input from the user.
-    Scanner userInput = new Scanner(System.in);
+        // We'll use this to get input from the user.
+        Scanner userInput = new Scanner(System.in);
 
-    // Storage for user's responses
-    String userResponse = "";
+        // Storage for user's responses
+        String userResponse = "";
 
-    System.out.println(User.textReset);
-    try{
-    System.out.println("...");
-    Thread.sleep(1);
-    System.out.println("The air is extremly still.");
-    Thread.sleep(1);
-    System.out.println("Before you is a dark expanse. Metallic walls surround you.");
-    Thread.sleep(1);
-    System.out.println("You have no idea where you are."); 
+        System.out.println(User.textReset);
+        try{
+            System.out.println("...");
+            Thread.sleep(1);
+            System.out.println("The air is extremly still.");
+            Thread.sleep(1);
+            System.out.println("Before you is a dark expanse. Metallic walls surround you.");
+            Thread.sleep(1);
+            System.out.println("You have no idea where you are."); 
 
-    System.out.println("");
-    System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
-    System.out.println("");
-    } catch (InterruptedException e) {}
+            System.out.println("");
+            System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
+            System.out.println("");
+        } catch (InterruptedException e) {}
 
-    // initilizes ship, user, aliens 
-    celestialBody Earth = new celestialBody("Earth", 1., true, "blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
-    Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
+        // initilizes ship, user, aliens 
+        celestialBody Earth = new celestialBody("Earth", 1., true, "blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
+        Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth); 
 
-    spaceShip ship = new spaceShip(100, Earth); 
-    User user = new User("name", Earth, 30); 
+        spaceShip ship = new spaceShip(100, Earth); 
+        User user = new User("name", Earth, 30); 
 
-    // initilizing other planets + moons 
-    celestialBody Mercury = new celestialBody("Mercury", 0.387, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock, false);
-    celestialBody Venus = new celestialBody("Venus", 0.723, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock, false);
-    celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock, false);
-    
-    celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas, true);
-    Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with deep red chasams. Something silvery juts out from the ground near your ship. \n You can almost make out the shape of a door?", surfaceProperties.ice, Jupiter); 
-    Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
+        // initilizing other planets + moons 
+        celestialBody Mercury = new celestialBody("Mercury", 0.387, false, "small, rocky and gray. Heavily cratered and having a very thin exosphere.", surfaceProperties.rock, false);
+        celestialBody Venus = new celestialBody("Venus", 0.723, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock, false);
+        celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock, false);
+        
+        celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \n Two icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas, true);
+        Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with deep red chasams. Something silvery juts out from the ground near your ship. \n You can almost make out the shape of a door?", surfaceProperties.ice, Jupiter); 
+        Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
 
-    Jupiter.addMoon(Europa);
-    Jupiter.addMoon(Ganymede); 
+        Jupiter.addMoon(Europa);
+        Jupiter.addMoon(Ganymede); 
 
-    celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas, false);
-    celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas, false);
-    celestialBody Neptune = new celestialBody("Neptune", 30., false, "a distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas, false);
-    celestialBody Pluto = new celestialBody("Pluto", 39.5, false, "small and desolate. A small red heart appears on its side." ,  surfaceProperties.rock, false);
+        celestialBody Saturn = new celestialBody("Saturn", 9.5, false, "delicate and ringed. Almost uniform in a golden beige color, and surrounded by majestic, rocky debris. ",  surfaceProperties.gas, false);
+        celestialBody Uranus = new celestialBody("Uranus", 19.19, false, "a light blue hue, hosting thin, teneous rings. The rings appears almost tilted on their side!",  surfaceProperties.gas, false);
+        celestialBody Neptune = new celestialBody("Neptune", 30., false, "a distant and deep blue. A small, dark blue spot peers back at you." ,  surfaceProperties.gas, false);
+        celestialBody Pluto = new celestialBody("Pluto", 39.5, false, "small and desolate. A small red heart appears on its side." ,  surfaceProperties.rock, false);
 
 
-    //initializing aliens
-    Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 15);
-    Alien alienTwo = new Alien("Ab the Alien", Pluto, false, 15);
-    Alien alienThree = new Alien("Ash the Alien", Mercury, false, 15);
-    Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
+        //initializing aliens
+        Alien alienOne = new Alien("Jordan the Alien", Ganymede, false, 15);
+        Alien alienTwo = new Alien("Ab the Alien", Pluto, false, 15);
+        Alien alienThree = new Alien("Ash the Alien", Mercury, false, 15);
+        Alien alienFour = new Alien("Lucy the Alien", Mars, true, 15);
 
-    //Adding aliens to planets solid ones 
-    Ganymede.getInfested(alienOne);
-    Pluto.getInfested(alienTwo);
-    moon.getInfested(alienThree);
-    Mars.getInfested(alienFour);
+        //Adding aliens to planets solid ones 
+        Ganymede.getInfested(alienOne);
+        Pluto.getInfested(alienTwo);
+        moon.getInfested(alienThree);
+        Mars.getInfested(alienFour);
 
-    // START DIALOGE
+        // START DIALOGE
 
-    System.out.println("What do you wish do?");
+        System.out.println("What do you wish do?");
 
-    do{
+        do{
             System.out.println("-----------------------------------------------------------");
             userResponse = userInput.nextLine().toLowerCase(); 
 
@@ -89,7 +89,7 @@ public class GameLoop {
                 }
 
                 else if (userResponse.contains("right")){
-                        System.out.println("To your right is a shelf, filled with books. On the top shelf is a picture frame containing a picture of a small child holding a cat.");
+                    System.out.println("To your right is a shelf, filled with books. On the top shelf is a picture frame containing a picture of a small child holding a cat.");
                 }
 
                 else if (userResponse.contains("backward") || userResponse.contains("behind")){
@@ -152,73 +152,83 @@ public class GameLoop {
                 introSequence = false; 
                 } catch (InterruptedException e) {}
 
-        } 
+            } 
 
-        else if(!userResponse.contains("look") && !userResponse.contains("move") && !userResponse.contains("examine") && !userResponse.contains("joystick")){
-           
+            else if(!userResponse.contains("look") && !userResponse.contains("move") && !userResponse.contains("examine") && !userResponse.contains("joystick")){
             System.out.println("I don't know what you mean. Try to 'look,' 'move,' or 'examine'");
-        }
+            }
 
         } while (introSequence); 
 
         System.out.println("A chill runs down your spine. How did this happen? When did this happen? What did this?");
-            System.out.println("and most importantly... How long have you been unconcious?");
-            System.out.println("");
-            System.out.println("What do you do? Where do you go?");
-            System.out.println("");
-            System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
-            // grabs user input 
+        System.out.println("and most importantly... How long have you been unconcious?");
+        System.out.println("");
+        System.out.println("What do you do? Where do you go?");
+        System.out.println("");
+        System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
+
         do { 
+            
             System.out.println("-----------------------------------------------------------");
             userResponse = userInput.nextLine().toLowerCase(); 
             
             if (userResponse.contains("go")){
+
                 boolean goSuccess = true;
+
                 if (userResponse.contains("mars")){
-                    ship.go(Mars);}
+                    ship.go(Mars);
+                }
+
                 else if (userResponse.contains("mercury")){
-                    ship.go(Mercury);}
+                    ship.go(Mercury);
+                }
+
                 else if (userResponse.contains("venus")){
-                    ship.go(Venus);}
+                    ship.go(Venus);
+                }
+
                 else if (userResponse.contains("earth")){
                     System.out.println("As you approach Earth, the Moon comes into view");
                     ship.go(Earth);
                 }
+
                 else if (userResponse.contains("jupiter")){
                     ship.go(Jupiter);
                     System.out.println("As you approach Jupiter, two moons - Ganymede and Europa - come into view.");
                     System.out.println("");
-
                 } 
 
                 else if (userResponse.contains("neptune")){
                     ship.go(Neptune);
                 } 
+
                 else if(userResponse.contains("uranus")){
                     ship.go(Uranus);
                 }
+
                 else if(userResponse.contains("saturn")){
                     ship.go(Saturn);
 
                 } 
+
                 else if(userResponse.contains("pluto")){
                     ship.go(Pluto);
-
                 } 
+
                 else if (!ship.location.name.equals("Jupiter")){
                     if(userResponse.contains("ganymede") || userResponse.contains("europa")){
-                    goSuccess = false;
-                    System.out.println("You must be in orbit around the host planet before landing on a moon.");
-                    System.out.println("");
+                        goSuccess = false;
+                        System.out.println("You must be in orbit around the host planet before landing on a moon.");
+                        System.out.println("");
                     }
                 } 
 
-            if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
-                System.out.println("");
-                System.out.println("While you orbit the body, something on the surface appears to be moving...");
-                System.out.println("");
-                
-            }
+                if (!ship.location.inhabitants.isEmpty() && goSuccess){ 
+                    System.out.println("");
+                    System.out.println("While you orbit the body, something on the surface appears to be moving...");
+                    System.out.println("");
+                }
             }
 
             // if orbiting Jupiter, can land on moons 
@@ -262,7 +272,7 @@ public class GameLoop {
                     System.out.println("The walls around you begin to cave in as the outside haze closes in.");
                     System.out.println("You feel crushed under the extreme gravity as the ship's power begins to fade...");
                     System.out.println("");
-                  //  endgameSequence = true;   // rip 
+                    //  endgameSequence = true;   // rip 
                     user.die(); 
                     midgameSequence = false; 
                     landSuccess = false; 
@@ -289,9 +299,10 @@ public class GameLoop {
                     } else{
                         System.out.println("The surface seems too damaged to land...");
                         System.out.println("");
-                    }}
+                    }
+                }
                 
-               if (midgameSequence && landSuccess){
+                if (midgameSequence && landSuccess){
 
                 System.out.println("");
                 System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off");
@@ -310,7 +321,7 @@ public class GameLoop {
                     if (userResponse.contains("board") && !userResponse.contains("un")){
                         if (user.onBoard){
                             System.out.println("You are already on board.");
-                        }  else{
+                        }  else {
                             ship.board(user);
                             System.out.println("Would you like to take off again (y/n)?");
                             String userResponseTakeOff = userInput.nextLine().toLowerCase();
@@ -336,7 +347,7 @@ public class GameLoop {
                             } else if (!ship.location.equals(Europa)){
                                 System.out.println("No matter where you look, there's no signs of life.");
                             }
-                            }
+                        }
                     }
 
                     if (userResponse.contains("take off")){
@@ -359,29 +370,30 @@ public class GameLoop {
                             System.out.println("-----------------------------------------------------------");
                             userResponse = userInput.nextLine().toLowerCase(); 
 
-                        if (userResponse.toLowerCase().trim().contains("open") && user.knowsCode){
-                            System.out.println("You insert the key into the hole, and turn the knob.");
-                            System.out.println("The door opens to reveal a staircase, leading down.");
-                            System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
-                            System.out.println("You enter the elevator, and press the only button there.");
-                            System.out.println("'going down!'");
-                            System.out.println("...");
-                            System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
-                            midgameSequence = false;   
+                            if (userResponse.toLowerCase().trim().contains("open") && user.knowsCode){
+                                System.out.println("You insert the key into the hole, and turn the knob.");
+                                System.out.println("The door opens to reveal a staircase, leading down.");
+                                System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
+                                System.out.println("You enter the elevator, and press the only button there.");
+                                System.out.println("'going down!'");
+                                System.out.println("...");
+                                System.out.println("After some time, the elevator opens to a room."); // idk what ending should be but here it is
+                                midgameSequence = false;   
 
-                        } } 
+                            } 
+                        } 
                             //End of game stuff
                         
                         else if (!user.knowsCode){
                             System.out.println("Suprise, suprise. the door is locked.");
                             System.out.println("Maybe the key is somewhere...");
                             System.out.println("The solar system isn't that big, right?");
-                            //Print some kind of basic description here?
                         }
                         
                     }
 
                     if (userResponse.contains("fight") || userResponse.contains("attack")){
+                        
                         if(user.onBoard || localLife.name.equals("bacteria")){
                             System.out.println("What are you going to fight? The ground?");
                         } 
@@ -392,33 +404,33 @@ public class GameLoop {
                                 localLife.alive = false;
                             }
 
-                            if (localLife.alive){ /// why wrong 
-                            user.attack(localLife);
-
+                            if (localLife.alive){
+                                user.attack(localLife);
                                 if (!user.alive){
                                     midgameSequence = false; 
                                     System.out.println("The alien strikes you, and it really hurts... you collapse to the ground!");
-                                } } 
-                             
+                                } 
+                            } 
+                                
                             if (user.alive && !localLife.alive && !localLife.hasKey){
-                            System.out.println("The earthworm-like being lets out a shrill cry, and then, almost like a projection, dissapates.");
-                            System.out.println("...");
-                            System.out.println("Well, that was weird.");
-                            }
-
-                                 else if (!localLife.alive && localLife.hasKey){ // if has the key, 
+                                System.out.println("The earthworm-like being lets out a shrill cry, and then, almost like a projection, dissapates.");
+                                System.out.println("...");
+                                System.out.println("Well, that was weird.");
+                            } else if (!localLife.alive && localLife.hasKey){ // if has the key, 
                                 System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
                                 System.out.println(localLife.textColor +localLife.name + ": Now Human, let's not fight. How about a conversation?" + User.textReset);
-                                }
-                    } else if (!localLife.alive){
-                        if (localLife.hasKey){
-                            System.out.println(localLife.textColor +localLife.name +  ": Didn't you hear me? Let's not fight." + User.textReset);
-                        } else{
-                            System.out.println("It's already gone!");
+                            }
+                        } 
+                        
+                        else if (!localLife.alive){
+                            if (localLife.hasKey){
+                                System.out.println(localLife.textColor +localLife.name +  ": Didn't you hear me? Let's not fight." + User.textReset);
+                            } else{
+                                System.out.println("It's already gone!");
+                            }
                         }
-                    }
-                }
-                 
+                    }   
+                    
 
                     if (userResponse.contains("talk")){
                         if (user.onBoard || localLife.name.equals("bacteria")){
@@ -427,13 +439,11 @@ public class GameLoop {
                         else if (!localLife.hasKey){ // does not have key talk
                             localLife.alienTalk(); 
                         }
-
                         else if (localLife.hasKey){
                             System.out.println("What do you want to say? ");
                             String userTalk = userInput.nextLine().toLowerCase(); 
                             user.userTalk(localLife, userTalk); 
                         }
-
                     }
 
                     if ((userResponse.contains("status"))){
@@ -444,13 +454,12 @@ public class GameLoop {
                         }
                     }
 
-                    //This also prints if talk is happening, fix this?
                     else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open") && !userResponse.contains("take") && !userResponse.contains("door") && !userResponse.contains("silver")){
-                    System.out.println("I don't know what you mean. Try 'talk', 'fight', 'take off, 'board/unboard', 'take off'");
+                        System.out.println("I don't know what you mean. Try 'talk', 'fight', 'take off, 'board/unboard', 'take off'");
                     }
 
-                } while (landSuccess && midgameSequence); }
-            
+                } while (landSuccess && midgameSequence); 
+                }
             }
 
             if ((userResponse.contains("status"))){
@@ -458,13 +467,12 @@ public class GameLoop {
             }
 
             if(!userResponse.contains("status") && !userResponse.contains("land") && !userResponse.contains("go") && !userResponse.contains("board") && !userResponse.contains("open") && !userResponse.contains("take off")){
-                    System.out.println("I don't know what you mean. ");  //This prints when user dies in fight — how to fix?
-                    System.out.println("");
-                    }
+                System.out.println("I don't know what you mean. ");  //This prints when user dies in fight — how to fix?
+                System.out.println("");
+            }
 
-          } while (midgameSequence);
-        
-        
+        } while (midgameSequence);
+            
         if (user.alive){
             try{
                 Thread.sleep(1000); 
@@ -489,9 +497,6 @@ public class GameLoop {
             System.out.println("You should go back to sleep.");
             } catch (InterruptedException e) {}
         }
-
-        }
-
-        
-        }
+    }
+}
 

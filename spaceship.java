@@ -82,18 +82,21 @@ class spaceShip{
      * @return - if land was successful
      */
     public boolean land(celestialBody bodyName){
+        boolean landReturn = false;
         //If the ship is at the body,
-        if (this.location == bodyName){ 
+        if (this.location == bodyName && !this.location.destroyed){ 
             //The user can land!
           //  System.out.println("Landing on " + bodyName.name + "..."); //Print that the ship is landing
          //   System.out.println("Welcome to " + bodyName.name + "!"); //Print that the landing was successful
             System.out.println(bodyName.name + " appears " + bodyName.description); //Print what you see 
             this.fuel -= 1; //Decrease fuel level by one
-            return true; //Return that the landing was successful
-        } else{ //If not, 
+            landReturn = true; //Return that the landing was successful
+        } else if (!this.location.destroyed){ //If not, 
             System.out.println("You cannot land on a body you are not near! Go to this body before you land."); //Print that the landing cannot happen until you are at the body
-            return false; //return that landing was not successful
+        } else if (this.location.destroyed){
+            System.out.println("The surface seems to damaged to land...");
         }
+        return landReturn;
     }
 
     /**
@@ -123,7 +126,7 @@ class spaceShip{
         System.out.println("-------------------------");
        // Print methods avaliable at different stages of the game
         if (place.equals("introSequence")){
-            System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine");
+            System.out.println("OPTIONS: \n + Look [up/left/right/down] \n + Examine");
         } else if (place.equals("orbitSequence")){
             System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
         } else if (place.equals("onBody")){
