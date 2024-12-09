@@ -5,18 +5,7 @@ public class User extends Being{
     //Unique attributes of a being
     boolean knowsCode; // boolean to represent if the user has found out the truth! 
     boolean onBoard; //should this be in ship or person class? should be wherever board() is
-    public static final String ANSI_RED = "\u001B[31m"; 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static String[] responses = {
-        "Sup, brah?",
-        "You wouldn't believe what happened to our homeworld, even if I told you.",
-        "... You're not supposed to be here.",
-        "Get off my lawn!",
-        "You're not another one of those Earthlings, are you?",
-        "If you're looking for your people, they aren't here. Take a left at the red gas giant, maybe.",
-        "I don't know anything. Ask Red.", // hint to go to mars worm 
-    };
+    public static final String textReset = "\u001B[0m";
 
     public User(String name, celestialBody location, int hitpoints){
         super(name, location, hitpoints);
@@ -24,26 +13,14 @@ public class User extends Being{
         this.knowsCode = false; // CHANGE 
     }
 
-    static String talkResponses(){ 
-        Random rand = new Random();
-        int number = rand.nextInt(responses.length);
-        String talkResponse = responses[number];
-        return talkResponse;
-      }
-
-    public void talk(Alien name){
-        System.out.print(ANSI_GREEN);
-        System.out.println(name.name + ": " + talkResponses());
-        System.out.print(ANSI_RESET);
-        }
     
     // move to alien?
-    public void talk(Alien name, String dialog){
+    public void userTalk(Alien name, String dialog){
 
-            System.out.println(ANSI_RED + "...");
+            System.out.println(name.textColor + "...");
 
             if (dialog.toLowerCase().contains("please") && !this.knowsCode){
-                System.out.println(ANSI_RED + "Fine... I'll tell you where to go. But only because you asked nicely.");
+                System.out.println(name.textColor + "Fine... I'll tell you where to go. But only because you asked nicely.");
                 System.out.println("There is a moon in the distance.");
                 System.out.println("I dropped off what was rest of your lot there");
                 System.out.println("Of course, they didn't seem to like it much.");
@@ -51,7 +28,7 @@ public class User extends Being{
                 System.out.println("But its for the better.");
                 System.out.println("My kids and I don't really like to swim.");
                 System.out.println("...");
-                System.out.println("OH! You need this also - " + ANSI_RESET);
+                System.out.println("OH! You need this also - ");
                 System.out.println("The worm hands (where did it get hands?) you a small silver key.");
                 this.knowsCode = true; 
             }
@@ -61,13 +38,15 @@ public class User extends Being{
                 System.out.println("I have what you need...");
                 System.out.println("You're just going to have to ask nicely.");
                 System.out.println("I always told my kids to be polite when talking to a stranger."); 
-                System.out.println("That or... don't talk to strangers... I forget." + ANSI_RESET);
+                System.out.println("That or... don't talk to strangers... I forget.");
             }
 
             else if (this.knowsCode){
                 System.out.println("I've already given you what you need.");
-                System.out.println("Leave me be, won't you?!" + ANSI_RESET);
+                System.out.println("Leave me be, won't you?!");
             }
+
+            System.out.println(textReset);
         }
     
 
@@ -100,7 +79,7 @@ public class User extends Being{
         }
 
         if (being.hitpoints < 5){
-            System.out.println(name + " is starting to look a little pale.");
+            System.out.println(being.name + " is starting to look a little pale.");
             System.out.println("Maybe you're getting somewhere!");
         }
 
