@@ -57,15 +57,20 @@ class spaceShip{
         if (fuel < distance){
             //Print that the ship cannot go there
             System.out.println("You don't have enough fuel to go here!");
+            System.out.println("");
         } else{ //If the ship does have enough fuel,
             //Check that the ship isn't already there
             if(distance == 0){ //If the ship is already at the body, 
                 //print this for the user
                 System.out.println("You are already here!");
+                System.out.println("");
+
             } else{ //If the ship is not at the body,
                 fuel -= distance; //descrease fuel level by distance
                 this.location = bodyName; //set ship location to the body
                 System.out.println("You are now in orbit about " + bodyName.name + "."); //Print that you have arrived at the body
+                System.out.println("");
+
             }
         }
         
@@ -80,8 +85,8 @@ class spaceShip{
         //If the ship is at the body,
         if (this.location == bodyName){ 
             //The user can land!
-            System.out.println("Landing on " + bodyName.name + "..."); //Print that the ship is landing
-            System.out.println("Welcome to " + bodyName.name + "!"); //Print that the landing was successful
+          //  System.out.println("Landing on " + bodyName.name + "..."); //Print that the ship is landing
+         //   System.out.println("Welcome to " + bodyName.name + "!"); //Print that the landing was successful
             System.out.println(bodyName.name + " appears " + bodyName.description); //Print what you see 
             this.fuel -= 1; //Decrease fuel level by one
             return true; //Return that the landing was successful
@@ -116,10 +121,10 @@ class spaceShip{
         //Print fuel status and location
         System.out.println("CURRENT STATUS: \n + Fuel = " + this.fuel + "\n + LOCATION: " + this.location.name); 
         //Print methods avaliable at different stages of the game
-        if (place.equals("introSequence")){
-            System.out.println("OPTIONS:\n + Look \n + Move \n + Examine");
-        } else if (place.equals("midgameSequence")){
-            System.out.println("OPTIONS: \n + Go\n + Land\n + Status");
-        } 
+        // if (place.equals("introSequence")){
+        //     System.out.println("OPTIONS:\n + Look \n + Move \n + Examine");
+        // } else if (place.equals("midgameSequence")){
+        //     System.out.println("OPTIONS: \n + Go\n + Land\n + Status");
+        // } 
     }
 }
