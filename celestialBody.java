@@ -10,8 +10,6 @@ class celestialBody{
     ArrayList<Moon> moons; //Moons of a celestial body
     boolean destroyed; //Whether or not the body has been destroyed
     String description; //A short description of the body
-    boolean hasMoons; //Whether or not the body has moons 
-        //*IDK if hasmoons is necessary*
 
     
     /**
@@ -29,7 +27,6 @@ class celestialBody{
         this.destroyed = destroyed; 
         this.description = description; 
         this.surface = surface; 
-        this.hasMoons = hasMoons; 
         //Intializing array lists of moons and inhabitants
         this.moons = new ArrayList<>();
         this.inhabitants = new ArrayList<>();
@@ -44,8 +41,12 @@ class celestialBody{
         this.inhabitants.add(alien); 
     }
 
+    /**
+     * Method to assign a moon to a body
+     * @param moon - moon to be added
+     */
     public void addMoon(Moon moon){
-        this.moons.add(moon); 
+        this.moons.add(moon); //Adds moon to body's list of moons
     }
 
 }

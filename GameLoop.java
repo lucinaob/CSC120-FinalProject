@@ -272,7 +272,7 @@ public class GameLoop {
                if (midgameSequence){
 
                 System.out.println("");
-                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n ");
+                System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off \n");
                 System.out.println("");
 
                 do { 
@@ -293,7 +293,8 @@ public class GameLoop {
                             ship.board(user);
                             System.out.println("Would you like to take off again (y/n)?");
                             String userResponseTakeOff = userInput.nextLine().toLowerCase();
-                            if(userResponseTakeOff.contains("y")){
+                            if(userResponseTakeOff.toLowerCase().contains("y")){
+                                ship.takeOff(ship.location);
                                 landSuccess  = false;
                             } 
                             System.out.println("What do you wish to do?");
@@ -315,6 +316,14 @@ public class GameLoop {
                                 System.out.println("");
                                 }
                             }
+                    }
+
+                    if (userResponse.contains("take off")){
+                        if (!user.onBoard){
+                            System.out.println("You can't take off from outside the ship!");
+                        } else{
+                            ship.takeOff(ship.location);
+                        }
                     }
                             
 
@@ -412,8 +421,8 @@ public class GameLoop {
                     }
 
                     //This also prints if talk is happening, fix this?
-                    else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open")){
-                    System.out.println("I don't know what you mean. Try 'talk', 'fight', 'board/unboard'");
+                    else if(!userResponse.contains("status") && !userResponse.contains("talk") && !userResponse.contains("fight") && !userResponse.contains("attack") &&  !userResponse.contains("board") &&  !userResponse.contains("examine") && !userResponse.contains("open") && !userResponse.contains("take off")){
+                    System.out.println("I don't know what you mean. Try 'talk', 'fight', 'take off, 'board/unboard'");
                     }
 
                 } while (landSuccess && midgameSequence); }
