@@ -16,7 +16,7 @@ public class GameLoop {
     // Storage for user's responses
     String userResponse = "";
 
-    System.out.println(User.ANSI_RESET);
+    System.out.println(User.textReset);
     System.out.println("...");
     System.out.println("The air is extremly still.");
     System.out.println("Before you is a dark expanse. Metallic walls surround you.");
@@ -383,11 +383,11 @@ public class GameLoop {
 
                                  else if (!localLife.alive && localLife.hasKey){ // if has the key, 
                                 System.out.println("The earthworm crumbles to the ground, flickers once, and then gets back up.");
-                                System.out.println(User.ANSI_RED +localLife.name + ": Now Human, let's not fight. How about a conversation?" + User.ANSI_RESET);
+                                System.out.println(localLife.textColor +localLife.name + ": Now Human, let's not fight. How about a conversation?" + User.textReset);
                                 }
                     } else if (!localLife.alive){
                         if (localLife.hasKey){
-                            System.out.println(User.ANSI_RED +localLife.name +  ": Didn't you hear me? Let's not fight." + User.ANSI_RESET);
+                            System.out.println(localLife.textColor +localLife.name +  ": Didn't you hear me? Let's not fight." + User.textReset);
                         } else{
                             System.out.println("It's already gone!");
                         }
@@ -400,13 +400,13 @@ public class GameLoop {
                             System.out.println("I know times are tough, but talking to the air is a step too far.");
                         } 
                         else if (!localLife.hasKey){ // does not have key talk
-                            user.talk(localLife); 
+                            localLife.alienTalk(); 
                         }
 
                         else if (localLife.hasKey){
                             System.out.println("What do you want to say? ");
                             String userTalk = userInput.nextLine().toLowerCase(); 
-                            user.talk(localLife, userTalk); 
+                            user.userTalk(localLife, userTalk); 
                         }
 
                     }
