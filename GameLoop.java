@@ -177,7 +177,7 @@ public class GameLoop {
         System.out.println("");
         System.out.println("What do you do? Where do you go?");
         System.out.println("");
-        System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
+        System.out.println("OPTIONS:\n + Go to [planet/moon name] \n + Land on [planet/moon name]");
 
         do { 
             
