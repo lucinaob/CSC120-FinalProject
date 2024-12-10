@@ -25,9 +25,9 @@ public class GameLoop {
             System.out.println("Before you is a dark expanse. Metallic walls surround you.");
             Thread.sleep(2000);
             System.out.println("You have no idea where you are."); 
-
+            Thread.sleep(2000);
             System.out.println("");
-            System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine [object] \n + move [object]");
+            System.out.println("OPTIONS: \n + look [up/left/right/down/backwards] \n + examine [object] \n + move [object]");
             System.out.println("");
         } catch (InterruptedException e) {}
 
@@ -95,7 +95,7 @@ public class GameLoop {
                 }
 
                 else if (userResponse.contains("backward") || userResponse.contains("behind")){
-                    System.out.println("Behind you is a metal room. It's dark, you can't see much from this vantage point.");
+                    System.out.println("Behind you is a metal room. Nothing too fancy, and certainly nothing too interesting.");
                 }
 
                 else if (userResponse.contains("up")){
@@ -127,6 +127,16 @@ public class GameLoop {
                 else if (userResponse.contains("photo") || userResponse.contains("picture")){
                     System.out.println("The photo is old, but in pristine condition.");
                     System.out.println("The child looks a little familiar.");
+                }
+
+                else if (userResponse.contains("wall")){
+                    System.out.println("The walls are a plain gray metal.");
+                    System.out.println("A map of the solar system is taped to the wall, with a child-like star sticker stuck half-way between Saturn and Jupiter.");
+                }
+
+                else if (userResponse.contains("screen")){
+                    System.out.println("There isn't much else going on with the screen.");
+                    System.out.println("Looking at it too close makes your eyes burn, a bit.");
                 }
 
                 else{
@@ -438,7 +448,7 @@ public class GameLoop {
                     
 
                     if (userResponse.contains("talk")){
-                        if (user.onBoard || localLife.name.equals("bacteria")){
+                        if (user.onBoard || localLife.name.equals("bacteria") || !localLife.alive){
                             System.out.println("I know times are tough, but talking to the air is a step too far.");
                         } 
                         else if (!localLife.hasKey){ // does not have key talk

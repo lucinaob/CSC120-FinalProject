@@ -46,7 +46,7 @@ public class User extends Being{
                 System.out.println("Leave me be, won't you?!");
             }
 
-            System.out.println(textReset);
+            System.out.print(textReset);
         }
     
 
