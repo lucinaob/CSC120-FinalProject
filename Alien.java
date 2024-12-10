@@ -15,6 +15,7 @@ public class Alien extends Being{
         "You're not another one of those Earthlings, are you?",
         "If you're looking for your people, they aren't here. Take a left at the red gas giant, maybe.",
         "I don't know anything. Ask Red.", // hint to go to mars worm 
+        "You'd be better off on... oh, what was it's name?\n Ares? Not quite. The red, rocky one!"
     };
     
 
@@ -40,8 +41,4 @@ public class Alien extends Being{
         System.out.println(this.name + ": " + talkResponses());
         System.out.print(User.textReset);
     }
-
-    
-    
-
 }

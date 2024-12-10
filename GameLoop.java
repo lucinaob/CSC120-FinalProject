@@ -177,7 +177,7 @@ public class GameLoop {
         System.out.println("");
         System.out.println("What do you do? Where do you go?");
         System.out.println("");
-        System.out.println("OPTIONS:\n + Go to [planet/moon name] \n + Land on [planet/moon name]");
+        System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
 
         do { 
             
@@ -228,7 +228,7 @@ public class GameLoop {
                     ship.go(Pluto);
                 } 
 
-                else if (!ship.location.name.equals("Jupiter")){
+                else if (!ship.location.name.equals("Jupiter") || !ship.location.name.equals("Europa") || !ship.location.name.equals("Ganymede")){
                     if(userResponse.contains("ganymede") || userResponse.contains("europa")){
                         goSuccess = false;
                         System.out.println("You must be in orbit around the host planet before landing on a moon.");
@@ -245,11 +245,15 @@ public class GameLoop {
 
             // if orbiting Jupiter, can land on moons 
             if (userResponse.contains("go") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("ganymede")){
-                ship.go(Ganymede); 
+                if(ship.location.name.equals("Jupiter") || ship.location.name.equals("Europa")){
+                    ship.go(Ganymede);
+                }
             }
 
-            if (userResponse.contains("go") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("europa")){
-                ship.go(Europa); 
+            if (userResponse.contains("go") && userResponse.toLowerCase().contains("europa")){
+                if(ship.location.name.equals("Jupiter") || ship.location.name.equals("Ganymede")){
+                    ship.go(Europa);
+                }
             }
 
             if (userResponse.contains("land") && ship.location.name.equals("Jupiter") && userResponse.toLowerCase().contains("ganymede")){
@@ -270,7 +274,7 @@ public class GameLoop {
             }
 
             if (userResponse.toLowerCase().contains("land") && !userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){
-                System.out.println("You can't land on a planet you aren't near.");
+                System.out.println("You can't land on a planet you aren't orbiting. Try going there first!");
             }
 
             if (userResponse.toLowerCase().contains("land") && userResponse.toLowerCase().contains(ship.location.name.toLowerCase())){                
