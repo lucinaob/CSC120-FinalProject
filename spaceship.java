@@ -77,7 +77,6 @@ class spaceShip{
 
             }
         }
-        
     }
 
     /**
@@ -136,27 +135,30 @@ class spaceShip{
         } else if (place.equals("onBody")){
             System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off \n" );
         } 
-
     }
 
+    /**
+     * Printing ASCII map of the solar system
+     */
     public void displaySS(){
 
         try {
-        File myFile = new File("planet_images/" + "ss.txt");
-        Scanner fileReader = new Scanner(myFile); // <- Same kind of object we used to read from the command line! But instead of System.in, we're reading from the file
+            File myFile = new File("planet_images/" + "ss.txt"); // Read text file
+            Scanner fileReader = new Scanner(myFile); // <- Same kind of object we used to read from the command line! But instead of System.in, we're reading from the file
 
-        // Loop until we run out of lines
-        while (fileReader.hasNextLine()) {
-            String data = fileReader.nextLine();
-            System.out.println(data);
-        }
+            // Loop until we run out of lines
+            while (fileReader.hasNextLine()) {
+                //Print next line of the text file
+                String data = fileReader.nextLine();
+                System.out.println(data);
+            }
 
-        // Tidy up
-        fileReader.close();
+            // Tidy up
+            fileReader.close();
         
-        } catch (FileNotFoundException e) { // Sometimes things go wrong; we'll handle that here
-        System.out.println("An error occurred.");
-        e.printStackTrace();
+        } catch (FileNotFoundException e) { // Catch if there is an issue reading the file
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

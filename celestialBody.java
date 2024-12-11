@@ -52,6 +52,9 @@ class celestialBody{
         this.moons.add(moon); //Adds moon to body's list of moons
     }
 
+    /**
+     * Method to display the ASCII iamge of a celestial body
+     */
     public void display(){
 
         try {
@@ -60,6 +63,7 @@ class celestialBody{
 
         // Loop until we run out of lines
         while (fileReader.hasNextLine()) {
+            //Print the next line of the ASCII image
             String data = fileReader.nextLine();
             System.out.println(data);
         }
@@ -67,14 +71,9 @@ class celestialBody{
         // Tidy up
         fileReader.close();
         
-        } catch (FileNotFoundException e) { // Sometimes things go wrong; we'll handle that here
-        System.out.println("An error occurred.");
-        e.printStackTrace();
+        } catch (FileNotFoundException e) { // Catch if there is an error in printing the file
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
-
-    
-
-
     }
-
 }

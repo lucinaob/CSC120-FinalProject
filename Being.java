@@ -20,6 +20,17 @@ public class Being {
     }
 
     /**
+     * Overloaded constructor for beings without names
+     * @param location - location in solar system
+     * @param hitpoints - # of hitpoints
+     */
+    public Being(celestialBody location, int hitpoints){
+        this.hitpoints = hitpoints; 
+        this.alive = true; // Being always starts out alive 
+        this.location = location;
+    }
+
+    /**
      * Method to remove hitpoints when a being is hurt
      * @param hitpoints - the number of hitpoints to remove from a being
      */
