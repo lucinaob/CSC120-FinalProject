@@ -17,7 +17,7 @@ public class Alien extends Being{
         "You're not another one of those Earthlings, are you?",
         "If you're looking for your people, they aren't here. Take a left at the red gas giant, maybe.", //Hint to go near jupiter
         "I don't know anything. Ask Red.", // hint to go to mars worm 
-        "You'd be better off on... oh, what was it's name?\n Ares? Not quite. The red, rocky one!" //Hint to go to mars
+        "You'd be better off on... oh, what was it's name?\nAres? Not quite. The red, rocky one!" //Hint to go to mars
     };
     
 
