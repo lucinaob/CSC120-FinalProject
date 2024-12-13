@@ -193,16 +193,18 @@ public class GameLoop {
             
             if (userResponse.contains("go")){ //If user wants to go somewhere
                 
-                if (ship.fuel <= 0){ // first ensure that the user has enough fuel currently in their tank
-                    System.out.println("You comamnd your ship to move, but a flashing message appears on the screen." );
-                    System.out.println("LOW FUEL. LOW FUEl. LOW FUEL.");
-                    System.out.println("Where the heck are you supposed to get fuel?");
-                    user.die(); 
-                    midgameSequence = false; 
-                }
                 boolean goSuccess = true; //Set boolean of go being successful to true 
                 //Because this boolean is almost always true, it's easier to set it it true here and untrue in a few places than untrue here and true everywhere else
 
+                if (ship.fuel <= 3){ // first ensure that the user has enough fuel currently in their tank
+                    System.out.println("You comamnd your ship to move, but a flashing message appears on the screen." );
+                    System.out.println(Alien.textRed + "LOW FUEL. LOW FUEl. LOW FUEL." + User.textReset);
+                    System.out.println("Where the heck are you supposed to get fuel?");
+                    user.die(); 
+                    midgameSequence = false; 
+                    goSuccess = false;
+                }
+                
                 //Go to celestial body the user specifies
                 if (userResponse.contains("mars")){
                     ship.go(Mars);

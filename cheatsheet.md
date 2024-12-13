@@ -21,7 +21,7 @@ Introduction:
 - examine book
 - examine wall
 - examine screen 
-[examine book gives information about Jupiter's moon Europa being the end game location. Other examine commands reveal filler information]
+[examine book and wall give hints about Jupiter's moon Europa being the end game location. Other examine commands reveal filler information]
 
 - press button / eject 
 [does nothing]
@@ -30,7 +30,7 @@ Introduction:
 [Initiates interspace sequence]
 
 Interspace sequence 
-- go to [Mercury; Venus; Earth; Mars; Jupiter; Saturn; Uranus; Neptune; Pluto]
+- go to [Mercury; Venus; Earth; Mars; Jupiter; Saturn; Uranus; Neptune; Pluto; Sun]
     - if on Earth, go to moon 
     - if on Jupiter, go to Europa; go to Ganymede 
     - if player does not have enough fuel to continue and has not found the solution, they are stuck in the game forever... (must manually exit)
@@ -49,7 +49,7 @@ Landing sequence
 - board [only if unboarded]
 - take off [only if on board]
 
-Landing sequence (on Europa) + contains all of above landing sequence +
+Landing sequence (on Europa) + contains all of above landing sequence operations +
 - examine [door, silver] 
 [calls same command]
 - open door 
@@ -67,4 +67,4 @@ FASTEST SOLUTION COMMANDS
 9. go to europa
 10. unboard 
 11. examine door 
-12. open dor
+12. open door
