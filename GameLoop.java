@@ -186,13 +186,20 @@ public class GameLoop {
         System.out.println("");
         System.out.println("OPTIONS:\n + Go to [planet/moon name] \n + Land on [planet/moon name]");
 
-        do { 
+        do { // while loop for midgame sequence 
             
             System.out.println("-----------------------------------------------------------");
             userResponse = userInput.nextLine().toLowerCase(); //Take in user input, lower case to avoid issues with capitalization
             
             if (userResponse.contains("go")){ //If user wants to go somewhere
-
+                
+                if (ship.fuel <= 0){ // first ensure that the user has enough fuel currently in their tank
+                    System.out.println("You comamnd your ship to move, but a flashing message appears on the screen." );
+                    System.out.println("LOW FUEL. LOW FUEl. LOW FUEL.");
+                    System.out.println("Where the heck are you supposed to get fuel?");
+                    user.die(); 
+                    midgameSequence = false; 
+                }
                 boolean goSuccess = true; //Set boolean of go being successful to true 
                 //Because this boolean is almost always true, it's easier to set it it true here and untrue in a few places than untrue here and true everywhere else
 
@@ -265,11 +272,11 @@ public class GameLoop {
                 }
 
                 else if (userResponse.contains("sun")){ //Handle if someone wants to go to the sun
-                    System.out.println("As you approach the sun, your ship suddenly stops.");
+                    System.out.println("As you approach the Sun, your ship suddenly stops.");
                     System.out.println("A bright red message pops up on the panel to your left:");
                     System.out.println(Alien.textRed + "TEMPERATURE TOO HIGH. CANNOT APPROACH." + User.textReset);
                     ship.go(Mercury);
-                    System.out.println("This is as far as you can go, it seems."); //Keep people playing the game and on-task
+                    System.out.println("This is as far as you can go, it seems. Mercury it is."); //Keep people playing the game and on-task 
                 }
 
                 //If the planet the user went to has aliens on it, print a hint about this
@@ -397,13 +404,17 @@ public class GameLoop {
                                     userResponse = userInput.nextLine().toLowerCase(); 
 
                                     if (userResponse.contains("open")){ //if the user asks to open it, open up the door
+                                        try{
                                         System.out.println("You insert the key into the hole, and turn the knob.");
                                         System.out.println("The door opens to reveal a staircase, leading down.");
                                         System.out.println("You descend the stairs, and after quite some time, come to an elevator.");
                                         System.out.println("You enter the elevator, and press the only button there.");
                                         System.out.println("'going down!'");
                                         System.out.println("...");
+                                        Thread.sleep(3000); // pause for 3s to read 
                                         System.out.println("After some time, the elevator opens to a room."); 
+                                        } catch (InterruptedException e) {}
+                                        
                                         midgameSequence = false; //Midgame sequence = false brings user to the end of the game
 
                                     } 
