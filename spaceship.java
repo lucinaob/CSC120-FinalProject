@@ -131,7 +131,7 @@ class spaceShip{
         if (place.equals("introSequence")){
             System.out.println("OPTIONS: \n + look [up/left/right/down] \n + examine [object] \n + move [object]");
         } else if (place.equals("orbitSequence")){
-            System.out.println("OPTIONS:\n + Go to [body name] \n + Land on [body name]");
+            System.out.println("OPTIONS:\n + Go to [planet/moon name] \n + Land on [planet/moon name]");
         } else if (place.equals("onBody")){
             System.out.println("OPTIONS: \n + Unboard \n + Board \n + Talk \n + Fight \n + Take off \n" );
         } 

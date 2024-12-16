@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GameLoop {
@@ -24,6 +26,30 @@ public class GameLoop {
         System.out.println(User.textReset); //Reset text color to the default, to avoid issues when game is played multiple times
 
         //Print intro statement
+        System.out.println("---------------------------------------------------------------");
+
+        try {
+            File myFile = new File("planet_images/" + "title.txt"); // Read text file
+            Scanner fileReader = new Scanner(myFile); // <- Same kind of object we used to read from the command line! But instead of System.in, we're reading from the file
+
+            // Loop until we run out of lines
+            while (fileReader.hasNextLine()) {
+                //Print next line of the text file
+                String data = fileReader.nextLine();
+                System.out.println(data);
+            }
+
+            // Tidy up
+            fileReader.close();
+        
+        } catch (FileNotFoundException e) { // Catch if there is an issue reading the file
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("- A text-based game by Ash Messier & Lucy Obrein -");
+        System.out.println("");
+
         try{
             System.out.println("...");
             Thread.sleep(500); //Wait .5 seconds between printing each line
@@ -42,7 +68,7 @@ public class GameLoop {
         celestialBody Venus = new celestialBody("Venus", 0.723, false, "hot and turbulant. Below the thick clouds is a cratered surface eeriely resembling Earth's, but over 600 degrees warmer.", surfaceProperties.rock, false);
         celestialBody Mars = new celestialBody("Mars", 1.52, false, "red and dusty. Rocks and craters are abundant", surfaceProperties.rock, false);
         celestialBody Earth = new celestialBody("Earth", 1., true, "blue and green, with a gaping hole through the center.",  surfaceProperties.rock, true); 
-        Moon moon = new Moon("Earth's moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth);
+        Moon moon = new Moon("Moon", 0.00257, false, "rocky and gray, with a stark view of the crumbling Earth on the horizon.", surfaceProperties.rock, Earth);
         celestialBody Jupiter = new celestialBody("Jupiter", 5.2, false, "massive and made entierly of swirling gas. Stratified cloud decks, and an angry, swirling red spot. \nTwo icy moons, Ganymede and Europa, come into view.", surfaceProperties.gas, true);
         Moon Europa = new Moon("Europa", 0.0042, false, "cold and icy, with deep red chasams. Something silvery juts out from the ground near your ship. \nYou can almost make out the shape of a door?", surfaceProperties.ice, Jupiter); 
         Moon Ganymede = new Moon("Ganymede", 0.007155, false, "massive, yet small relative to Jupiter. The surface appears icy and bland.", surfaceProperties.ice, Jupiter); 
@@ -184,7 +210,7 @@ public class GameLoop {
         System.out.println("");
         System.out.println("What do you do? Where do you go?");
         System.out.println("");
-        System.out.println("OPTIONS:\n + Go to [planet/moon name] \n + Land on [planet/moon name]");
+        System.out.println("OPTIONS:\n + Go to [planet/moon name] \n + Land on [planet/moon name] \n + status");
 
         do { // while loop for midgame sequence 
             
